@@ -1,0 +1,16 @@
+**/build
+**/devel
+**/build_isolated
+**/devel_isolated
+**/install_isolated
+src/CMakeLists.txt
+**/DRV8833_LEDC.cpp
+**/DRV8833_LEDC.h
+**/ros_lib
+cartographer/
+cartographer_ros/
+*.bag
+docker.txt
+**/*.log
+**/*.sdf
+

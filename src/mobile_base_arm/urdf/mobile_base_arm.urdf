@@ -1,0 +1,1523 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="mobile_base_arm">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.000319009600201481 -0.000666770976785788 0.0586004870049367"
+        rpy="0 0 0" />
+      <mass
+        value="0.374892757850051" />
+      <inertia
+        ixx="0.00148065842547931"
+        ixy="4.45853049505942E-06"
+        ixz="-2.24476310604444E-08"
+        iyy="0.00150620679112831"
+        iyz="2.34150704704751E-07"
+        izz="0.00296347734947406" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="fl_wheel_link">
+    <inertial>
+      <origin
+        xyz="5.0515E-15 1.5127E-15 -9.4853E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.041913" />
+      <inertia
+        ixx="3.6789E-06"
+        ixy="6.9186E-21"
+        ixz="-3.6443E-22"
+        iyy="3.6789E-06"
+        iyz="4.1837E-22"
+        izz="3.5669E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/fl_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/fl_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fl_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="0.078747 0.14588 0.029654"
+      rpy="1.5708 0 -3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="fl_wheel_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="bl_wheel_link">
+    <inertial>
+      <origin
+        xyz="2.9421E-15 4.5103E-15 9.4853E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.041913" />
+      <inertia
+        ixx="3.6789E-06"
+        ixy="4.5166E-21"
+        ixz="-3.9322E-22"
+        iyy="3.6789E-06"
+        iyz="6.8692E-23"
+        izz="3.5669E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/bl_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/bl_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="bl_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.078453 0.14588 0.029654"
+      rpy="1.5708 0 -3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="bl_wheel_link" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="fr_wheel_link">
+    <inertial>
+      <origin
+        xyz="0 1.3878E-17 -7.0631E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.041913" />
+      <inertia
+        ixx="3.6789E-06"
+        ixy="-7.5704E-21"
+        ixz="-2.4967E-21"
+        iyy="3.6789E-06"
+        iyz="3.1065E-23"
+        izz="3.5671E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/fr_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/fr_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fr_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="0.078747 -0.14712 0.029654"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="fr_wheel_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="br_wheel_link">
+    <inertial>
+      <origin
+        xyz="0 1.1102E-16 -7.0631E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.041913" />
+      <inertia
+        ixx="3.6789E-06"
+        ixy="-8.0203E-21"
+        ixz="-1.0462E-21"
+        iyy="3.6789E-06"
+        iyz="7.9773E-22"
+        izz="3.5671E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/br_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/br_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="br_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.078453 -0.14712 0.029654"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="br_wheel_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="lidar_link">
+    <inertial>
+      <origin
+        xyz="0.0059879 6.8946E-07 -0.0087379"
+        rpy="0 0 0" />
+      <mass
+        value="0.090024" />
+      <inertia
+        ixx="2.0425E-05"
+        ixy="2.8228E-09"
+        ixz="2.9686E-06"
+        iyy="3.8887E-05"
+        iyz="8.5101E-10"
+        izz="5.2888E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/lidar_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/lidar_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lidar_joint"
+    type="fixed">
+    <origin
+      xyz="0.045447 -0.074817 0.0658"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="lidar_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="link_1">
+    <inertial>
+      <origin
+        xyz="0.001372 0.0064346 0.017289"
+        rpy="0 0 0" />
+      <mass
+        value="0.068038" />
+      <inertia
+        ixx="4.5018E-05"
+        ixy="-6.4176E-07"
+        ixz="-6.2427E-06"
+        iyy="5.8133E-05"
+        iyz="-5.1777E-06"
+        izz="5.4676E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_1"
+    type="revolute">
+    <origin
+      xyz="0.060647 -0.00061982 0.1296"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="link_1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link_2">
+    <inertial>
+      <origin
+        xyz="-0.018035 0.032676 -0.0042316"
+        rpy="0 0 0" />
+      <mass
+        value="0.098269" />
+      <inertia
+        ixx="9.8625E-05"
+        ixy="3.4452E-05"
+        ixz="-2.9438E-07"
+        iyy="3.294E-05"
+        iyz="2.1721E-08"
+        izz="0.00011786" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_2"
+    type="revolute">
+    <origin
+      xyz="0.013741729606692 0.00180000000000001 0.0404532568712298"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="link_1" />
+    <child
+      link="link_2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.4"
+      upper="1.4"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link_3">
+    <inertial>
+      <origin
+        xyz="0.013721 0.023715 -0.017225"
+        rpy="0 0 0" />
+      <mass
+        value="0.084145" />
+      <inertia
+        ixx="5.1677E-05"
+        ixy="-2.1371E-05"
+        ixz="2.867E-07"
+        iyy="2.7629E-05"
+        iyz="4.8877E-07"
+        izz="6.4165E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/link_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_3"
+    type="revolute">
+    <origin
+      xyz="-0.0486912069159769 0.109677556359838 0"
+      rpy="0 0 0" />
+    <parent
+      link="link_2" />
+    <child
+      link="link_3" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.4"
+      upper="1.4"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link_4">
+    <inertial>
+      <origin
+        xyz="0.00023919 -0.0034536 0.0072121"
+        rpy="0 0 0" />
+      <mass
+        value="0.023628" />
+      <inertia
+        ixx="4.3645E-06"
+        ixy="3.9934E-09"
+        ixz="-4.8582E-08"
+        iyy="5.6713E-06"
+        iyz="5.7578E-07"
+        izz="2.9871E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/link_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/link_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_4"
+    type="revolute">
+    <origin
+      xyz="0.0462467946124107 0.0790683813413976 -0.0104772836816603"
+      rpy="-1.5707963267949 0 -0.530574095256852" />
+    <parent
+      link="link_3" />
+    <child
+      link="link_4" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.4"
+      upper="1.4"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link_5">
+    <inertial>
+      <origin
+        xyz="0.014865 0.0034873 -0.006785"
+        rpy="0 0 0" />
+      <mass
+        value="0.02285" />
+      <inertia
+        ixx="2.932E-06"
+        ixy="-1.1857E-06"
+        ixz="1.4019E-06"
+        iyy="8.8454E-06"
+        iyz="3.0497E-07"
+        izz="7.6221E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/link_5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/link_5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_5"
+    type="revolute">
+    <origin
+      xyz="0.00017223 -0.015127 0.028"
+      rpy="1.5708 -1.5708 0" />
+    <parent
+      link="link_4" />
+    <child
+      link="link_5" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.4"
+      upper="1.4"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="eef_link_1">
+    <inertial>
+      <origin
+        xyz="-0.0013154 -0.0026977 0.011688"
+        rpy="0 0 0" />
+      <mass
+        value="0.0096944" />
+      <inertia
+        ixx="8.3937E-07"
+        ixy="1.3228E-07"
+        ixz="1.5882E-22"
+        iyy="7.1486E-07"
+        iyz="3.7047E-08"
+        izz="8.2078E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/eef_link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/eef_link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="eef_joint_1"
+    type="revolute">
+    <origin
+      xyz="0.038466720887356 0.014139797883076 -0.0179"
+      rpy="-1.5707963267949 0 3.10994225522667" />
+    <parent
+      link="link_5" />
+    <child
+      link="eef_link_1" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1"
+      upper="1"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="eef_finger_link_1">
+    <inertial>
+      <origin
+        xyz="-0.026471 -0.0065368 0.00074998"
+        rpy="0 0 0" />
+      <mass
+        value="0.0053975" />
+      <inertia
+        ixx="1.3369E-07"
+        ixy="-2.5928E-07"
+        ixz="-1.0206E-12"
+        iyy="1.6452E-06"
+        iyz="-1.3992E-11"
+        izz="1.7139E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/eef_finger_link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/eef_finger_link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="eef_finger_joint_1"
+    type="fixed">
+    <origin
+      xyz="-0.0250754321495898 0.0177984606781366 0.00134999999999999"
+      rpy="0 0 0" />
+    <parent
+      link="eef_link_1" />
+    <child
+      link="eef_finger_link_1" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="eef_link_2">
+    <inertial>
+      <origin
+        xyz="-0.004888 -0.0027553 -0.00415"
+        rpy="0 0 0" />
+      <mass
+        value="0.0026416" />
+      <inertia
+        ixx="1.9158E-07"
+        ixy="-1.3273E-07"
+        ixz="1.3235E-22"
+        iyy="2.6271E-07"
+        iyz="6.6174E-24"
+        izz="4.4724E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/eef_link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/eef_link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="eef_joint_2"
+    type="revolute">
+    <origin
+      xyz="0.038466720887356 0.014139797883076 0.00899999999999998"
+      rpy="-1.5707963267949 0 3.10994225522667" />
+    <parent
+      link="link_5" />
+    <child
+      link="eef_link_2" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-1"
+      upper="1"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="eef_finger_link_2">
+    <inertial>
+      <origin
+        xyz="-0.026643 0.0057965 0.00075002"
+        rpy="0 0 0" />
+      <mass
+        value="0.0053975" />
+      <inertia
+        ixx="1.2042E-07"
+        ixy="2.1676E-07"
+        ixz="1.4115E-12"
+        iyy="1.6585E-06"
+        iyz="-1.3958E-11"
+        izz="1.7139E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/eef_finger_link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.2 0.2 0.2 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/eef_finger_link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="eef_finger_joint_2"
+    type="fixed">
+    <origin
+      xyz="-0.025013 -0.017886 0.00135"
+      rpy="0 0 0" />
+    <parent
+      link="eef_link_2" />
+    <child
+      link="eef_finger_link_2" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <!-- <link
+    name="MPU9250_fl">
+    <inertial>
+      <origin
+        xyz="-0.00044106 8.8161E-05 -0.0010426"
+        rpy="0 0 0" />
+      <mass
+        value="0.00062885" />
+      <inertia
+        ixx="2.8418E-08"
+        ixy="-4.5775E-14"
+        ixz="-3.7528E-14"
+        iyy="1.0661E-08"
+        iyz="4.2588E-14"
+        izz="3.7595E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU9250_fl.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU9250_fl.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="MPU9250_fl_joint"
+    type="fixed">
+    <origin
+      xyz="0.082447 0.092197 0.11257"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="MPU9250_fl" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="MPU6050_fl">
+    <inertial>
+      <origin
+        xyz="-0.00081359 5.5683E-05 -0.00080828"
+        rpy="0 0 0" />
+      <mass
+        value="0.0010017" />
+      <inertia
+        ixx="3.0394E-08"
+        ixy="1.306E-11"
+        ixz="-6.2461E-14"
+        iyy="1.6953E-08"
+        iyz="3.3681E-18"
+        izz="4.6329E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU6050_fl.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU6050_fl.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="MPU6050_fl_joint"
+    type="fixed">
+    <origin
+      xyz="0.049694 0.091495 0.11214"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="MPU6050_fl" />
+    <axis
+      xyz="0 0 0" />
+  </joint> -->
+  <link
+    name="MPU9250_fr">
+    <inertial>
+      <origin
+        xyz="-0.00044106 8.8161E-05 -0.0010426"
+        rpy="0 0 0" />
+      <mass
+        value="0.00062885" />
+      <inertia
+        ixx="2.8418E-08"
+        ixy="-4.5775E-14"
+        ixz="-3.7528E-14"
+        iyy="1.0661E-08"
+        iyz="4.2588E-14"
+        izz="3.7595E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 1.5708" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU9250_fr.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 1.5708" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU9250_fr.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="MPU9250_fr_joint"
+    type="fixed">
+    <origin
+      xyz="0.082437 -0.093437 0.11257"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="MPU9250_fr" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <!-- <link
+    name="MPU6050_fr">
+    <inertial>
+      <origin
+        xyz="-0.00081359 5.5683E-05 -0.00080828"
+        rpy="0 0 0" />
+      <mass
+        value="0.0010017" />
+      <inertia
+        ixx="3.0394E-08"
+        ixy="1.306E-11"
+        ixz="-6.2461E-14"
+        iyy="1.6953E-08"
+        iyz="3.3681E-18"
+        izz="4.6329E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU6050_fr.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU6050_fr.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="MPU6050_fr_joint"
+    type="fixed">
+    <origin
+      xyz="0.04946 -0.092735 0.11214"
+      rpy="0 0 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="MPU6050_fr" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="MPU9250_bl">
+    <inertial>
+      <origin
+        xyz="-0.00044106 8.8161E-05 -0.0010426"
+        rpy="0 0 0" />
+      <mass
+        value="0.00062885" />
+      <inertia
+        ixx="2.8418E-08"
+        ixy="-4.5775E-14"
+        ixz="-3.7528E-14"
+        iyy="1.0661E-08"
+        iyz="4.2588E-14"
+        izz="3.7595E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU9250_bl.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU9250_bl.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="MPU9250_bl_joint"
+    type="fixed">
+    <origin
+      xyz="-0.082143 0.092197 0.11257"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="MPU9250_bl" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="MPU6050_bl">
+    <inertial>
+      <origin
+        xyz="-0.00081359 5.5683E-05 -0.00080828"
+        rpy="0 0 0" />
+      <mass
+        value="0.0010017" />
+      <inertia
+        ixx="3.0394E-08"
+        ixy="1.306E-11"
+        ixz="-6.2461E-14"
+        iyy="1.6953E-08"
+        iyz="3.3681E-18"
+        izz="4.6329E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU6050_bl.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU6050_bl.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="MPU6050_bl_joint"
+    type="fixed">
+    <origin
+      xyz="-0.049166 0.091495 0.11214"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="MPU6050_bl" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="MPU9250_br">
+    <inertial>
+      <origin
+        xyz="-0.00044106 8.8161E-05 -0.0010426"
+        rpy="0 0 0" />
+      <mass
+        value="0.00062885" />
+      <inertia
+        ixx="2.8418E-08"
+        ixy="-4.5775E-14"
+        ixz="-3.7528E-14"
+        iyy="1.0661E-08"
+        iyz="4.2588E-14"
+        izz="3.7595E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU9250_br.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU9250_br.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="MPU9250_br_joint"
+    type="fixed">
+    <origin
+      xyz="-0.082153 -0.093437 0.11257"
+      rpy="0 0 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="MPU9250_br" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="MPU6050_br">
+    <inertial>
+      <origin
+        xyz="-0.00081359 5.5683E-05 -0.00080828"
+        rpy="0 0 0" />
+      <mass
+        value="0.0010017" />
+      <inertia
+        ixx="3.0394E-08"
+        ixy="1.306E-11"
+        ixz="-6.2461E-14"
+        iyy="1.6953E-08"
+        iyz="3.3681E-18"
+        izz="4.6329E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU6050_br.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/MPU6050_br.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="MPU6050_br_joint"
+    type="fixed">
+    <origin
+      xyz="-0.049405 -0.092735 0.11214"
+      rpy="0 0 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="MPU6050_br" />
+    <axis
+      xyz="0 0 0" />
+  </joint> -->
+  <link
+    name="camera_link">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/camera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="camera_joint"
+    type="fixed">
+    <origin
+      xyz="0.11165 -0.00061982 0.03"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="rgb_right_link">
+    <inertial>
+      <origin
+        xyz="-0.47142 -0.0775 0.07745"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/rgb_right_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.0353 0.47451 0.41176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/rgb_right_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rgb_right_joint"
+    type="fixed">
+    <origin
+      xyz="0.0056 -0.0325 0.00355"
+      rpy="0 0 0" />
+    <parent
+      link="camera_link" />
+    <child
+      link="rgb_right_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="rgb_right_link_optical">
+    <inertial>
+      <origin
+        xyz="0.0775 -0.07745 -0.47142"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/rgb_right_link_optical.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.0353 0.47451 0.41176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/rgb_right_link_optical.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rgb_right_optical_joint"
+    type="fixed">
+    <origin
+      xyz="0.0056 -0.0325 0.00355"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="camera_link" />
+    <child
+      link="rgb_right_link_optical" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="rgb_left_link">
+    <inertial>
+      <origin
+        xyz="-0.47142 -0.1425 0.07745"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/rgb_left_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.0353 0.47451 0.41176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/rgb_left_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rgb_left_joint"
+    type="fixed">
+    <origin
+      xyz="0.0055995 0.0325 0.00355"
+      rpy="0 0 0" />
+    <parent
+      link="camera_link" />
+    <child
+      link="rgb_left_link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="rgb_left_link_optical">
+    <inertial>
+      <origin
+        xyz="0.1425 -0.07745 -0.47142"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/rgb_left_link_optical.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.0353 0.47451 0.41176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/rgb_left_link_optical.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rgb_left_optical_joint"
+    type="fixed">
+    <origin
+      xyz="0.0055995 0.0325 0.00355"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="camera_link" />
+    <child
+      link="rgb_left_link_optical" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+</robot>

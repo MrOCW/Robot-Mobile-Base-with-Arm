@@ -1,0 +1,44 @@
+FROM ros:melodic
+ENV ROS_DISTRO=melodic
+ENV ROS_ROOT=/opt/ros/${ROS_DISTRO}
+ENV DEBIAN_FRONTEND=noninteractive
+ENV SHELL /bin/bash
+SHELL ["/bin/bash", "-c"] 
+
+WORKDIR /workspace
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get --no-install-recommends install -y git && \
+    git clone https://github.com/MrOCW/Robot-Mobile-Base-with-Arm &&\
+    cd Robot-Mobile-Base-with-Arm &&\
+    source "/opt/ros/$ROS_DISTRO/setup.bash" &&\
+    apt-get --no-install-recommends install -y ros-${ROS_DISTRO}-rosserial-arduino && \
+    apt-get --no-install-recommends install -y ros-${ROS_DISTRO}-rosserial && \
+    cd src/ESP32_control/lib && \
+    rosrun rosserial_arduino make_libraries.py . && \
+    # Install cartographer
+    cd ../../.. && \
+    apt-get --no-install-recommends install -y python-wstool python-rosdep ninja-build stow && \
+    wstool merge -t src https://raw.githubusercontent.com/cartographer-project/cartographer_ros/master/cartographer_ros.rosinstall && \
+    wstool update -t src && \
+    rosdep update && \
+    rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -y && \
+    src/cartographer/scripts/install_abseil.sh && \
+    sudo mv src/cartographer_files/mobile_base_arm.lua src/cartographer_ros/cartographer_ros/configuration_files/mobile_base_arm.lua && \
+    sudo mv src/cartographer_files/mobile_base_arm_slam.launch src/cartographer_ros/cartographer_ros/launch/mobile_base_arm_slam.launch && \
+    sudo rm -rf src/cartographer_files && \
+    sudo apt-get --no-install-recommends install -y ros-${ROS_DISTRO}-imu-tools && \
+    # Install Moveit
+    apt-get update && \
+    apt-get dist-upgrade && \
+    apt --no-install-recommends install -y ros-${ROS_DISTRO}-catkin python-catkin-tools && \
+    apt --no-install-recommends install -y ros-${ROS_DISTRO}-moveit && \
+    # Install ydlidar package
+    cd src && \
+    sudo rm -rf ydlidar_ros && \
+    git clone https://github.com/YDLIDAR/ydlidar_ros && \
+    cd .. && \
+    catkin_make_isolated --install --use-ninja
+    
+WORKDIR /workspace/Robot-Mobile-Base-with-Arm
