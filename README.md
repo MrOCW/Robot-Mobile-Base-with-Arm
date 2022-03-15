@@ -44,12 +44,3 @@ $ docker build -t <distro>-mobile-base-arm -f Dockerfile.ros.<distro> .
 $ rocker <distro>-mobile-base-arm --x11 --nvidia --network host --privileged
 $ source install_isolated/setup.bash
 ```
-
-## Tasks
-- [ ] Complete kinematics modelling in [drive.cpp](src/ESP32_control/src/drive.cpp)
-- [ ] Fix robot-localization when fusing IMU data, currently only using lidar for odometry in navigation & localization
-- [x] Autonomous Navigation
-- [ ] Pick and Place
-- [ ] Gazebo simulation
-- [ ] Unity simulation (potentially for reinforcement learning)
-- [ ] Migrate to ROS2

@@ -64,131 +64,9 @@ void joint_states_cb(const sensor_msgs::JointState &joint_states_msg)
 
 void cmd_vel_cb(const geometry_msgs::Twist &cmd_vel_msg)
 {
-  // if (cmd_vel_msg.linear.x>0)
-  // {
-    
-  //   drive.forward(cmd_vel_msg.linear.x * 100);
-  // }
-  // else
-  // {
-  //   drive.stop();
-  // }
-  // if (cmd_vel_msg.linear.x > 0.0 && cmd_vel_msg.linear.x <= 1.0)
-  // {
-  //   digitalWrite(sleepl,HIGH);
-  //   digitalWrite(sleepr,HIGH);
-  //   // teleop: i/I
-  //   if (cmd_vel_msg.linear.y == 0.0\
-  //   && cmd_vel_msg.angular.z == 0.0)
-  //   {
-  //     drive.forward(static_cast<uint8_t>(cmd_vel_msg.linear.x * 100));
-  //   }
-  //   // teleop: U
-  //   else if (cmd_vel_msg.linear.y > 0.0\
-  //   && cmd_vel_msg.angular.z == 0.0)
-  //   {
-  //     drive.strafe_forward_left(50);
-  //   }
-  //   // teleop: O
-  //   else if (cmd_vel_msg.linear.y < 0.0\
-  //   && cmd_vel_msg.angular.z == 0.0)
-  //   {
-  //     drive.strafe_forward_right(50);
-  //   }
-  //   // teleop: u
-  //   else if (cmd_vel_msg.linear.y == 0.0\
-  //   && cmd_vel_msg.angular.z < 0.0)
-  //   {
-  //     drive.forward_right(50);
-  //   }
-  //   // teleop: o
-  //   else if (cmd_vel_msg.linear.y == 0.0\
-  //   && cmd_vel_msg.angular.z > 0.0)
-  //   {
-  //     drive.forward_left(50);
-  //   }
-  // }
-  
-  // else if (cmd_vel_msg.linear.x < 0.0 && cmd_vel_msg.linear.x >= -1.0)
-  // {
-  //   digitalWrite(sleepl,HIGH);
-  //   digitalWrite(sleepr,HIGH);
-  //   // teleop: ,/<
-  //   if (cmd_vel_msg.linear.y == 0.0\
-  //   && cmd_vel_msg.angular.z == 0.0)
-  //   {
-  //     drive.reverse(static_cast<uint8_t>(50));
-  //   }
-  //   // teleop: M
-  //   else if (cmd_vel_msg.linear.y > 0.0\
-  //   && cmd_vel_msg.angular.z == 0.0)
-  //   {
-  //     drive.strafe_reverse_left(50);
-  //   }
-  //   // teleop: >
-  //   else if (cmd_vel_msg.linear.y < 0.0\
-  //   && cmd_vel_msg.angular.z == 0.0)
-  //   {
-  //     drive.strafe_reverse_right(50);
-  //   }
-  //   // teleop: .
-  //   else if (cmd_vel_msg.linear.y == 0.0\
-  //   && cmd_vel_msg.angular.z < 0.0)
-  //   {
-  //     drive.reverse_right(50);
-  //   }
-  //   // teleop: m
-  //   else if (cmd_vel_msg.linear.y == 0.0\
-  //   && cmd_vel_msg.angular.z > 0.0)
-  //   {
-  //     drive.reverse_left(50);
-  //   }
-  // }
-  // else if (cmd_vel_msg.linear.x == 0.0)
-  // {
-    
-  //   // teleop: J
-  //   if (cmd_vel_msg.linear.y > 0.0\
-  //   && cmd_vel_msg.angular.z == 0.0)
-  //   {
-  //     digitalWrite(sleepl,HIGH);
-  //     digitalWrite(sleepr,HIGH);
-  //     drive.strafe_left(50);
-  //   }
-  //   // teleop: L
-  //   else if (cmd_vel_msg.linear.y < 0.0\
-  //   && cmd_vel_msg.angular.z == 0.0)
-  //   {
-  //     digitalWrite(sleepl,HIGH);
-  //     digitalWrite(sleepr,HIGH);
-  //     drive.strafe_right(50);
-  //   }
-  //   // teleop: l
-  //   else if (cmd_vel_msg.linear.y == 0.0\
-  //   && cmd_vel_msg.angular.z < 0.0)
-  //   {
-  //     digitalWrite(sleepl,HIGH);
-  //     digitalWrite(sleepr,HIGH);
-  //     drive.rotate_cw(50);
-  //   }
-  //   // teleop: j
-  //   else if (cmd_vel_msg.linear.y == 0.0\
-  //   && cmd_vel_msg.angular.z > 0.0)
-  //   {
-  //     digitalWrite(sleepl,HIGH);
-  //     digitalWrite(sleepr,HIGH);
-  //     drive.rotate_ccw(50);
-  //   }
-  //   else if (cmd_vel_msg.linear.y == 0.0 && cmd_vel_msg.angular.z == 0)
-  //   {
-  //     drive.stop();
-  //     digitalWrite(sleepl,LOW);
-  //     digitalWrite(sleepr,LOW);
-  //   }
   digitalWrite(sleepl,HIGH);
   digitalWrite(sleepr,HIGH);
   drive.drive(cmd_vel_msg.linear.x,cmd_vel_msg.linear.y,cmd_vel_msg.angular.z);
-  // }
 }
 MPU9250 IMU(i2c0,0x68);
 
@@ -276,7 +154,7 @@ void loop()
   ros_time = nh.now();
   IMU.readSensor();
   imu_raw.linear_acceleration.x = IMU.getAccelX_mss();
-  imu_raw.linear_acceleration.y = IMU.getAccelY_mss();
+  imu_raw.linear_acceleration.y = -IMU.getAccelY_mss();
   imu_raw.linear_acceleration.z = 9.81f; // set to 9.81 since we are dealing with 2D only
   imu_raw.angular_velocity.x = IMU.getGyroX_rads();
   imu_raw.angular_velocity.y = IMU.getGyroY_rads();
