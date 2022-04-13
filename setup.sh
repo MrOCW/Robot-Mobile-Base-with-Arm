@@ -57,7 +57,7 @@ then
     then
         sudo apt install -y ros-${ROS_DISTRO}-catkin python3-catkin-tools python3-osrf-pycommon
     fi
-    sudo apt-get install -y ros-${ROS_DISTRO}-dwa-local-planner
+    sudo apt-get install -y ros-${ROS_DISTRO}-navigation
 
     # Install ydlidar package
     cd src

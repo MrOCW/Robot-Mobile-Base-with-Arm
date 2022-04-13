@@ -4,8 +4,10 @@
   <param
     name="robot_description"
     textfile="$(find mobile_base_arm)/urdf/mobile_base_arm.urdf" />
-  <arg name="map_file" default="$(find navigation)/maps/test_map.yaml"/>
+  <arg name="map_file" default="$(find navigation)/maps/cw_map.yaml"/>
   <arg name="open_rviz" default="true"/>
+  <arg name="teleop" default="false"/>
+  <arg name="cam" default="true"/>
 
   <node name="ydlidar_node"  pkg="ydlidar_ros"  type="ydlidar_node" output="screen" respawn="false" >
     <param name="port"              type="string" value="/dev/ttyUSB1"/>  
@@ -18,7 +20,7 @@
     <param name="angle_max"         type="double" value="180" />
     <param name="range_min"         type="double" value="0.2" />
     <param name="range_max"         type="double" value="12.0" />
-    <param name="ignore_array"      type="string" value="68,75,134,140" /> <!-- fl,bl -->
+    <param name="ignore_array"      type="string" value="" /> <!-- fl,bl -->
     <param name="frequency"         type="double" value="8"/>
     <param name="samp_rate"         type="int"    value="3"/>
     <param name="isSingleChannel"   type="bool"   value="true"/>
@@ -67,6 +69,14 @@
   <!-- rviz -->
   <group if="$(arg open_rviz)"> 
     <node pkg="rviz" type="rviz" name="rviz" required="true"
-          args="-d $(find navigation)/launch/localization.rviz"/>
+          args="-d $(find navigation)/rviz/localization.rviz"/>
+  </group>
+
+  <group if="$(arg teleop)">
+    <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop" output="screen"/>
+  </group>
+  
+  <group if="$(arg cam)">
+    <include file="$(find gscam)/jetson_stereo.launch"/>
   </group>
 </launch>

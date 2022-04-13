@@ -11,6 +11,10 @@ cartographer/
 cartographer_ros/
 *.bag
 docker.txt
-**/*.log
-**/*.sdf
-
+*.log
+*.sdf
+*.pio
+*.vscode
+*.pgm
+**/teleop_twist_keyboard
+**/maps/*

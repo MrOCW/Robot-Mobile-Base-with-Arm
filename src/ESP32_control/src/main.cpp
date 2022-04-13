@@ -2,7 +2,6 @@
 #include <Servo.h>
 #include <DRV8833_MCPWM.h>
 #include <drive.h>
-#include <WiFi.h>
 #include <ros.h>
 #include <time.h>
 #include <sensor_msgs/JointState.h>
@@ -12,7 +11,7 @@
 #include <std_msgs/String.h>
 #include <MPU9250.h>
 
-bool debug = false;
+bool debug = true;
 
 Servo servo1;
 Servo servo2;
@@ -44,7 +43,17 @@ const int sleepr = 15;
 DRV8833 DRV8833_L;
 DRV8833 DRV8833_R;
 Drive drive;
-
+bool check_zero_speeds(float speeds[])
+{
+  for (int speed = 0; speed<4; speed++)
+  {
+    if (speeds[speed] != 0)
+    {
+      return false;
+    }
+  }
+  return true;     
+}
 int rad2deg(double radian)
 {
   int degree = static_cast<int>(radian * (180 / 3.14159));
@@ -121,7 +130,7 @@ void setup()
   servo5.write(90);
   servo6.write(90);
   servo7.write(90);
-  
+
   nh.getHardware()->setBaud(115200);
   nh.initNode();
   nh.subscribe(joint_sub);
@@ -143,7 +152,7 @@ void setup()
   // setting DLPF bandwidth to 20 Hz
   IMU.setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_41HZ);
   // setting SRD to 19 for a 50 Hz update rate
-  // IMU.setSrd(19);
+  IMU.setSrd(19);
   IMU.calibrateAccel();
   IMU.calibrateMag();
 }
@@ -152,16 +161,33 @@ void loop()
 {
   // read the sensor
   ros_time = nh.now();
-  IMU.readSensor();
-  imu_raw.linear_acceleration.x = IMU.getAccelX_mss();
-  imu_raw.linear_acceleration.y = -IMU.getAccelY_mss();
-  imu_raw.linear_acceleration.z = 9.81f; // set to 9.81 since we are dealing with 2D only
-  imu_raw.angular_velocity.x = IMU.getGyroX_rads();
-  imu_raw.angular_velocity.y = IMU.getGyroY_rads();
-  imu_raw.angular_velocity.z = -IMU.getGyroZ_rads();
-  imu_raw.header.stamp.sec = ros_time.sec;
-  imu_raw.header.stamp.nsec = ros_time.nsec;
-  imu_raw.orientation_covariance[0] = -1;
+  if (check_zero_speeds(drive.speeds))
+  { // might cause further drift due to ignoring deceleration?
+    imu_raw.linear_acceleration.x = 0;
+    imu_raw.linear_acceleration.y = 0;
+    imu_raw.linear_acceleration.z = 9.80665f; // set to 9.81 since we are dealing with 2D only
+    imu_raw.angular_velocity.x = 0;
+    imu_raw.angular_velocity.y = 0;
+    imu_raw.angular_velocity.z = 0;
+    imu_raw.header.stamp.sec = ros_time.sec;
+    imu_raw.header.stamp.nsec = ros_time.nsec;
+    imu_raw.orientation_covariance[0] = -1;
+  }
+  else
+  {
+    IMU.readSensor();
+    imu_raw.linear_acceleration.x = -IMU.getAccelX_mss();
+    imu_raw.linear_acceleration.y = IMU.getAccelY_mss();
+    imu_raw.linear_acceleration.z = 9.80665f; // set to 9.81 since we are dealing with 2D only
+    imu_raw.angular_velocity.x = IMU.getGyroX_rads();
+    imu_raw.angular_velocity.y = IMU.getGyroY_rads();
+    imu_raw.angular_velocity.z = -IMU.getGyroZ_rads();
+    imu_raw.header.stamp.sec = ros_time.sec;
+    imu_raw.header.stamp.nsec = ros_time.nsec;
+    imu_raw.orientation_covariance[0] = -1;
+  }
+  
+  
   if (debug==true)
   {
     Serial.printf("Accel(%.6lf, %.6lf, %.6lf) Gyro(%.6lf, %.6lf, %.6lf) Mag(%.6f, %.6f, %.6f), Yaw: %6.f\n",\
@@ -175,5 +201,6 @@ void loop()
   nh.spinOnce();
   delay(1);
 }
+
 
 
