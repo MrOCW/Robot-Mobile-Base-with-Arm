@@ -21,7 +21,7 @@
     <param name="use_odom"                                  value = "false"/>
     <param name="use_imu"                                   value="true"/>
     <param name="do_compute_covariance"                     value="1"/>
-    <param name="publish_tf"                                value ="true"/> <!-- set to false when using robot-localization-->
+    <param name="publish_tf"                                value ="false"/> <!-- set to false when using robot-localization-->
     <param name="publish_pose_with_covariance"              value="false"/>
     <param name="publish_pose_with_covariance_stamped"      value="true"/>
   </node>
@@ -29,9 +29,10 @@
   <!-- AMCL -->
   <include file="$(find navigation)/launch/amcl.launch"/>
 
-  <!--<node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+  <!-- Sensor Fusion -->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
     <rosparam command="load" file="$(find navigation)/param/ekf.yaml"/>
-  </node>-->
+  </node>
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
     <param name="use_gui" value="False"/>

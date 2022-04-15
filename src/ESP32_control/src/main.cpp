@@ -161,7 +161,7 @@ void loop()
 {
   // read the sensor
   ros_time = nh.now();
-  if (check_zero_speeds(drive.speeds))
+  /*if (check_zero_speeds(drive.speeds))
   { // might cause further drift due to ignoring deceleration?
     imu_raw.linear_acceleration.x = 0;
     imu_raw.linear_acceleration.y = 0;
@@ -174,18 +174,18 @@ void loop()
     imu_raw.orientation_covariance[0] = -1;
   }
   else
-  {
-    IMU.readSensor();
-    imu_raw.linear_acceleration.x = -IMU.getAccelX_mss();
-    imu_raw.linear_acceleration.y = IMU.getAccelY_mss();
-    imu_raw.linear_acceleration.z = 9.80665f; // set to 9.81 since we are dealing with 2D only
-    imu_raw.angular_velocity.x = IMU.getGyroX_rads();
-    imu_raw.angular_velocity.y = IMU.getGyroY_rads();
-    imu_raw.angular_velocity.z = -IMU.getGyroZ_rads();
-    imu_raw.header.stamp.sec = ros_time.sec;
-    imu_raw.header.stamp.nsec = ros_time.nsec;
-    imu_raw.orientation_covariance[0] = -1;
-  }
+  {*/
+  IMU.readSensor();
+  imu_raw.linear_acceleration.x = -IMU.getAccelX_mss();
+  imu_raw.linear_acceleration.y = IMU.getAccelY_mss();
+  imu_raw.linear_acceleration.z = 9.80665f; // set to 9.81 since we are dealing with 2D only
+  imu_raw.angular_velocity.x = IMU.getGyroX_rads();
+  imu_raw.angular_velocity.y = IMU.getGyroY_rads();
+  imu_raw.angular_velocity.z = -IMU.getGyroZ_rads();
+  imu_raw.header.stamp.sec = ros_time.sec;
+  imu_raw.header.stamp.nsec = ros_time.nsec;
+  imu_raw.orientation_covariance[0] = -1;
+  //}
   
   
   if (debug==true)
