@@ -6,6 +6,6 @@ moveit_setup_assistant_config:
   SRDF:
     relative_path: config/mobile_base_arm.srdf
   CONFIG:
-    author_name: cw
+    author_name: Ong Chee Wei
     author_email: ocw_97@hotmail.com
-    generated_timestamp: 1643217637
+    generated_timestamp: 1650907261
