@@ -15,7 +15,7 @@
     <param name="camera_name" value="left"/>
     <param name="camera_info_url" value="package://gscam/examples/rpi_left.yaml"/>
     <param name="gscam_config" value="nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM), width=(int)$(arg width), height=(int)$(arg height), format=(string)NV12, framerate=(fraction)$(arg fps)/1 ! nvvidconv flip-method=0 ! video/x-raw, format=(string)BGRx ! videoconvert"/>
-    <param name="frame_id" value="rgb_left_link"/>
+    <param name="frame_id" value="rpi_left"/>
     <param name="sync_sink" value="true"/>
     <remap from="camera/image_raw" to="stereo/left/image_raw" />
     <remap from="/set_camera_info" to="stereo/left/set_camera_info" />
@@ -28,7 +28,7 @@
     <param name="camera_name" value="right"/>
     <param name="camera_info_url" value="package://gscam/examples/rpi_right.yaml"/>
     <param name="gscam_config" value="nvarguscamerasrc sensor-id=1 ! video/x-raw(memory:NVMM), width=(int)$(arg width), height=(int)$(arg height), format=(string)NV12, framerate=(fraction)$(arg fps)/1 ! nvvidconv flip-method=0 ! video/x-raw, format=(string)BGRx ! videoconvert"/>
-    <param name="frame_id" value="rgb_right_link"/>
+    <param name="frame_id" value="rpi_right"/>
     <param name="sync_sink" value="true"/>
     <remap from="camera/image_raw" to="stereo/right/image_raw" />
     <remap from="/set_camera_info" to="stereo/right/set_camera_info" />

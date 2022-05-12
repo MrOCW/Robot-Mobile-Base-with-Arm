@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
      Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
-<robot
-  name="mobile_base_arm">
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="mobile_base_arm">
   <link
     name="base_link">
     <inertial>
       <origin
-        xyz="0.00032177 -5.3779E-05 0.025665"
+        xyz="0.00032177 -5.3779E-05 0.03254"
         rpy="0 0 0" />
       <mass
         value="0.31986" />
@@ -44,18 +44,24 @@
       </geometry>
     </collision>
   </link>
+
+  <xacro:include filename="$(find realsense2_description)/urdf/_d455.urdf.xacro" />
+  <xacro:sensor_d455 parent="base_link" use_nominal_extrinsics="true">
+    <origin xyz="0.0972160967770802 0 0.0356" rpy="0 0 0"/>
+  </xacro:sensor_d455>
+
   <link
     name="link_1">
     <inertial>
       <origin
-        xyz="0.001372 0.0064346 0.017289"
+        xyz="0.001372 0.0064346 0.018389"
         rpy="0 0 0" />
       <mass
         value="0.068038" />
       <inertia
         ixx="4.5018E-05"
         ixy="-6.4176E-07"
-        ixz="-6.2427E-06"
+        ixz="-6.2428E-06"
         iyy="5.8133E-05"
         iyz="-5.1777E-06"
         izz="5.4676E-05" />
@@ -71,7 +77,7 @@
       <material
         name="">
         <color
-          rgba="0.5 0.5 0.5 1" />
+          rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -88,7 +94,7 @@
     name="joint_1"
     type="revolute">
     <origin
-      xyz="0.060511 -5.5861E-05 0.0726"
+      xyz="0.059011 -5.5861E-05 0.0865"
       rpy="0 0 0" />
     <parent
       link="base_link" />
@@ -106,17 +112,17 @@
     name="link_2">
     <inertial>
       <origin
-        xyz="-0.018035 0.032676 -0.0042316"
+        xyz="-0.023892 0.053497 0.0088688"
         rpy="0 0 0" />
       <mass
-        value="0.098269" />
+        value="0.064392" />
       <inertia
-        ixx="9.8625E-05"
-        ixy="3.4452E-05"
-        ixz="-2.9438E-07"
-        iyy="3.294E-05"
-        iyz="2.1721E-08"
-        izz="0.00011786" />
+        ixx="9.0916E-05"
+        ixy="3.6316E-05"
+        ixz="-9.7008E-08"
+        iyy="2.5232E-05"
+        iyz="2.1909E-07"
+        izz="0.00011184" />
     </inertial>
     <visual>
       <origin
@@ -129,7 +135,7 @@
       <material
         name="">
         <color
-          rgba="0.5 0.5 0.5 1" />
+          rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -146,8 +152,8 @@
     name="joint_2"
     type="revolute">
     <origin
-      xyz="0.013742 0.0018 0.040453"
-      rpy="1.5708 0 0" />
+      xyz="0.0137417296065389 0.0029000000007262 0.0415532568712299"
+      rpy="1.5707963267949 0 0" />
     <parent
       link="link_1" />
     <child
@@ -164,17 +170,17 @@
     name="link_3">
     <inertial>
       <origin
-        xyz="0.013721 0.023715 -0.017225"
+        xyz="0.01964 -0.034025 0.0095089"
         rpy="0 0 0" />
       <mass
-        value="0.084145" />
+        value="0.050268" />
       <inertia
-        ixx="5.1677E-05"
-        ixy="-2.1371E-05"
-        ixz="2.867E-07"
-        iyy="2.7629E-05"
-        iyz="4.8877E-07"
-        izz="6.4165E-05" />
+        ixx="4.3058E-05"
+        ixy="1.9744E-05"
+        ixz="-1.4545E-07"
+        iyy="2.0829E-05"
+        iyz="2.4803E-07"
+        izz="5.8149E-05" />
     </inertial>
     <visual>
       <origin
@@ -187,7 +193,7 @@
       <material
         name="">
         <color
-          rgba="0.5 0.5 0.5 1" />
+          rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -205,13 +211,13 @@
     type="revolute">
     <origin
       xyz="-0.048691 0.10968 0"
-      rpy="0 0 0" />
+      rpy="-3.1416 0 0" />
     <parent
       link="link_2" />
     <child
       link="link_3" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       lower="-1.4"
       upper="1.4"
@@ -222,17 +228,17 @@
     name="link_4">
     <inertial>
       <origin
-        xyz="-0.004933 -0.0036763 0.0072121"
+        xyz="-0.005046 -0.0052646 0.019341"
         rpy="0 0 0" />
       <mass
-        value="0.023628" />
+        value="0.016499" />
       <inertia
-        ixx="4.3645E-06"
-        ixy="3.9934E-09"
-        ixz="-4.8582E-08"
-        iyy="5.6713E-06"
+        ixx="3.9122E-06"
+        ixy="3.9929E-09"
+        ixz="-1.1536E-08"
+        iyy="5.0224E-06"
         iyz="5.7578E-07"
-        izz="2.9871E-06" />
+        izz="2.6125E-06" />
     </inertial>
     <visual>
       <origin
@@ -245,7 +251,7 @@
       <material
         name="">
         <color
-          rgba="0.5 0.5 0.5 1" />
+          rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -262,14 +268,14 @@
     name="joint_4"
     type="revolute">
     <origin
-      xyz="0.050708 0.076451 -0.0107"
-      rpy="-1.5708 0 -0.53057" />
+      xyz="0.0507079283195259 -0.0764510857051123 0.00960000000267675"
+      rpy="1.57079632676818 0 0.530574095256852" />
     <parent
       link="link_3" />
     <child
       link="link_4" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       lower="-1.4"
       upper="1.4"
@@ -280,17 +286,17 @@
     name="link_5">
     <inertial>
       <origin
-        xyz="0.014865 0.0034873 -0.006785"
+        xyz="0.026258 -3.1222E-05 0.0095185"
         rpy="0 0 0" />
       <mass
-        value="0.02285" />
+        value="0.021182" />
       <inertia
-        ixx="2.932E-06"
-        ixy="-1.1857E-06"
-        ixz="1.4019E-06"
-        iyy="8.8454E-06"
-        iyz="3.0497E-07"
-        izz="7.6221E-06" />
+        ixx="3.6601E-06"
+        ixy="1.8735E-08"
+        ixz="-9.65E-07"
+        iyy="8.5553E-06"
+        iyz="1.8624E-09"
+        izz="9.5457E-06" />
     </inertial>
     <visual>
       <origin
@@ -303,7 +309,7 @@
       <material
         name="">
         <color
-          rgba="0.5 0.5 0.5 1" />
+          rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -320,14 +326,72 @@
     name="joint_5"
     type="revolute">
     <origin
-      xyz="-0.005 -0.01535 0.028"
-      rpy="1.5708 -1.5708 0" />
+      xyz="-0.00499999999999984 -0.01535 0.0294999999985077"
+      rpy="1.57079632682587 -0.530574095256852 0" />
     <parent
       link="link_4" />
     <child
       link="link_5" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
+    <limit
+      lower="-1.4"
+      upper="1.4"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link_6">
+    <inertial>
+      <origin
+        xyz="0.00068187 0.0017453 0.033787"
+        rpy="0 0 0" />
+      <mass
+        value="0.015882" />
+      <inertia
+        ixx="3.2518E-06"
+        ixy="-6.227E-08"
+        ixz="1.5313E-08"
+        iyy="2.1515E-06"
+        iyz="4.4721E-08"
+        izz="2.3855E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/link_6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://mobile_base_arm/meshes/link_6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_6"
+    type="revolute">
+    <origin
+      xyz="0.0568500000006544 0.00510000000000022 0.0123999999969983"
+      rpy="-1.57079632684769 0 -1.5707963267421" />
+    <parent
+      link="link_5" />
+    <child
+      link="link_6" />
+    <axis
+      xyz="0 0 -1" />
     <limit
       lower="-1.4"
       upper="1.4"
@@ -338,17 +402,17 @@
     name="virtual_eef">
     <inertial>
       <origin
-        xyz="-0.0079571 0.015289 -0.080431"
+        xyz="-0.0089874 0.015289 -0.080323"
         rpy="0 0 0" />
       <mass
         value="0.0071286" />
       <inertia
-        ixx="4.5237E-07"
-        ixy="-3.704E-08"
-        ixz="-4.0001E-09"
+        ixx="4.523E-07"
+        ixy="-3.7046E-08"
+        ixz="-1.4805E-09"
         iyy="3.7461E-07"
-        iyz="-7.5375E-10"
-        izz="6.4885E-07" />
+        iyz="-2.7892E-10"
+        izz="6.4892E-07" />
     </inertial>
     <visual>
       <origin
@@ -361,7 +425,7 @@
       <material
         name="">
         <color
-          rgba="0 0 1 1" />
+          rgba="0 0 0.8 1" />
       </material>
     </visual>
     <collision>
@@ -378,10 +442,10 @@
     name="virtual_eef_joint"
     type="fixed">
     <origin
-      xyz="0.11861 0.0095012 -0.0036365"
-      rpy="0 -1.5504 3.1099" />
+      xyz="-0.00175 -0.00036346 0.13185"
+      rpy="0 0.0075287 -1.5708" />
     <parent
-      link="link_5" />
+      link="link_6" />
     <child
       link="virtual_eef" />
     <axis
@@ -391,16 +455,16 @@
     name="eef_link_1">
     <inertial>
       <origin
-        xyz="-0.00497 0.0027862 -0.00415"
+        xyz="0.00497 0.0027862 0.00415"
         rpy="0 0 0" />
       <mass
         value="0.0025659" />
       <inertia
         ixx="1.9043E-07"
-        ixy="1.3228E-07"
-        ixz="3.3087E-23"
+        ixy="-1.3228E-07"
+        ixz="1.5609E-22"
         iyy="2.6257E-07"
-        iyz="-1.6544E-22"
+        iyz="5.0816E-23"
         izz="4.4616E-07" />
     </inertial>
     <visual>
@@ -431,14 +495,14 @@
     name="eef_joint_1"
     type="revolute">
     <origin
-      xyz="-0.012628 -0.0021 -0.080526"
-      rpy="-1.5708 1.5504 0" />
+      xyz="-0.013659 -0.0021 -0.080358"
+      rpy="-1.5708 -1.5633 -3.1416" />
     <parent
       link="virtual_eef" />
     <child
       link="eef_link_1" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-1"
       upper="1"
@@ -449,16 +513,16 @@
     name="eef_finger_link_1">
     <inertial>
       <origin
-        xyz="-0.026471 -0.0065368 0.00074998"
+        xyz="0.026471 -0.0065368 -0.00425"
         rpy="0 0 0" />
       <mass
         value="0.0053975" />
       <inertia
         ixx="1.3369E-07"
-        ixy="-2.5928E-07"
+        ixy="2.5928E-07"
         ixz="-1.0206E-12"
         iyy="1.6452E-06"
-        iyz="-1.3992E-11"
+        iyz="1.3992E-11"
         izz="1.7139E-06" />
     </inertial>
     <visual>
@@ -487,31 +551,40 @@
   </link>
   <joint
     name="eef_finger_joint_1"
-    type="fixed">
+    type="revolute">
     <origin
-      xyz="-0.025075 0.017798 0.00135"
+      xyz="0.025075 0.017798 0.00215"
       rpy="0 0 0" />
     <parent
       link="eef_link_1" />
     <child
       link="eef_finger_link_1" />
     <axis
-      xyz="0 0 0" />
+      xyz="0 0 1" />
+    <limit
+      lower="-1"
+      upper="1"
+      effort="0"
+      velocity="0" />
+    <mimic
+      joint="eef_joint_1"
+      multiplier="-0.8"
+      offset="0" />
   </joint>
   <link
     name="eef_link_2">
     <inertial>
       <origin
-        xyz="-0.004888 -0.0027553 -0.00415"
+        xyz="0.004888 -0.0027553 0.00415"
         rpy="0 0 0" />
       <mass
         value="0.0026416" />
       <inertia
         ixx="1.9158E-07"
-        ixy="-1.3273E-07"
-        ixz="1.4558E-22"
+        ixy="1.3273E-07"
+        ixz="3.8346E-22"
         iyy="2.6271E-07"
-        iyz="6.6174E-24"
+        iyz="-1.6975E-22"
         izz="4.4724E-07" />
     </inertial>
     <visual>
@@ -542,14 +615,14 @@
     name="eef_joint_2"
     type="revolute">
     <origin
-      xyz="0.014267 -0.0021 -0.079979"
-      rpy="-1.5708 1.5504 0" />
+      xyz="0.01324 -0.0021 -0.080155"
+      rpy="-1.5708 -1.5633 -3.1416" />
     <parent
       link="virtual_eef" />
     <child
       link="eef_link_2" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="-1"
       upper="1"
@@ -564,16 +637,16 @@
     name="eef_finger_link_2">
     <inertial>
       <origin
-        xyz="-0.026643 0.0057965 0.00075002"
+        xyz="0.026643 0.0057965 -0.00425"
         rpy="0 0 0" />
       <mass
         value="0.0053975" />
       <inertia
         ixx="1.2042E-07"
-        ixy="2.1676E-07"
+        ixy="-2.1676E-07"
         ixz="1.4115E-12"
         iyy="1.6585E-06"
-        iyz="-1.3958E-11"
+        iyz="1.3958E-11"
         izz="1.7139E-06" />
     </inertial>
     <visual>
@@ -602,19 +675,24 @@
   </link>
   <joint
     name="eef_finger_joint_2"
-    type="fixed">
+    type="revolute">
     <origin
-      xyz="-0.025013 -0.017886 0.00135"
+      xyz="0.025013 -0.017886 0.00215"
       rpy="0 0 0" />
     <parent
       link="eef_link_2" />
     <child
       link="eef_finger_link_2" />
     <axis
-      xyz="0 0 0" />
+      xyz="0 0 1" />
+    <limit
+      lower="-1"
+      upper="1"
+      effort="0"
+      velocity="0" />
     <mimic
-      joint="eef_finger_joint_1"
-      multiplier="-1"
+      joint="eef_joint_2"
+      multiplier="-0.8"
       offset="0" />
   </joint>
   <link
@@ -644,7 +722,7 @@
       <material
         name="">
         <color
-          rgba="0 0 1 1" />
+          rgba="0 0 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -661,7 +739,7 @@
     name="lidar_joint"
     type="fixed">
     <origin
-      xyz="-0.059689 -0.0002372 0.0968"
+      xyz="-0.059689 -0.0002372 0.1118"
       rpy="0 0 0" />
     <parent
       link="base_link" />
@@ -674,16 +752,16 @@
     name="fl_wheel">
     <inertial>
       <origin
-        xyz="4.774E-15 1.4086E-15 -9.4853E-05"
+        xyz="5.218E-15 1.4225E-15 -9.4853E-05"
         rpy="0 0 0" />
       <mass
         value="0.041913" />
       <inertia
         ixx="3.6789E-06"
-        ixy="7.4707E-21"
-        ixz="6.0006E-22"
+        ixy="7.4838E-21"
+        ixz="6.1398E-22"
         iyy="3.6789E-06"
-        iyz="8.6318E-22"
+        iyz="8.6534E-22"
         izz="3.5669E-06" />
     </inertial>
     <visual>
@@ -697,7 +775,7 @@
       <material
         name="">
         <color
-          rgba="1 1 0 1" />
+          rgba="0.75294 0.75294 0 1" />
       </material>
     </visual>
     <collision>
@@ -727,16 +805,16 @@
     name="fr_wheel">
     <inertial>
       <origin
-        xyz="-2.2204E-16 6.9389E-17 -7.0631E-05"
+        xyz="3.3307E-16 5.5511E-17 -7.0631E-05"
         rpy="0 0 0" />
       <mass
         value="0.041913" />
       <inertia
         ixx="3.6789E-06"
-        ixy="-8.5464E-21"
-        ixz="-7.6289E-22"
+        ixy="-8.5729E-21"
+        ixz="-7.8275E-22"
         iyy="3.6789E-06"
-        iyz="1.9898E-21"
+        iyz="2.013E-21"
         izz="3.5671E-06" />
     </inertial>
     <visual>
@@ -750,7 +828,7 @@
       <material
         name="">
         <color
-          rgba="1 1 0 1" />
+          rgba="0.75294 0.75294 0 1" />
       </material>
     </visual>
     <collision>
@@ -780,16 +858,16 @@
     name="bl_wheel">
     <inertial>
       <origin
-        xyz="2.6645E-15 4.4964E-15 9.4853E-05"
+        xyz="1.7764E-15 4.4756E-15 9.4853E-05"
         rpy="0 0 0" />
       <mass
         value="0.041913" />
       <inertia
         ixx="3.6789E-06"
-        ixy="2.4773E-21"
-        ixz="-2.0786E-21"
+        ixy="2.4627E-21"
+        ixz="-2.048E-21"
         iyy="3.6789E-06"
-        iyz="-4.5776E-22"
+        iyz="-4.7401E-22"
         izz="3.5669E-06" />
     </inertial>
     <visual>
@@ -803,7 +881,7 @@
       <material
         name="">
         <color
-          rgba="1 1 0 1" />
+          rgba="0.75294 0.75294 0 1" />
       </material>
     </visual>
     <collision>
@@ -833,16 +911,16 @@
     name="br_wheel">
     <inertial>
       <origin
-        xyz="-5.5511E-16 9.0206E-17 -7.0631E-05"
+        xyz="-2.2204E-16 6.9389E-17 -7.0631E-05"
         rpy="0 0 0" />
       <mass
         value="0.041913" />
       <inertia
         ixx="3.6789E-06"
-        ixy="-8.8144E-21"
-        ixz="-7.2527E-22"
+        ixy="-8.8177E-21"
+        ixz="-7.2196E-22"
         iyy="3.6789E-06"
-        iyz="3.6719E-23"
+        iyz="2.3484E-23"
         izz="3.5671E-06" />
     </inertial>
     <visual>
@@ -856,7 +934,7 @@
       <material
         name="">
         <color
-          rgba="1 1 0 1" />
+          rgba="0.75294 0.75294 0 1" />
       </material>
     </visual>
     <collision>
@@ -882,7 +960,7 @@
     <axis
       xyz="0 0 1" />
   </joint>
-  <link
+  <!-- <link
     name="MPU9250_fl">
     <inertial>
       <origin
@@ -934,7 +1012,7 @@
       link="MPU9250_fl" />
     <axis
       xyz="0 0 0" />
-  </joint>
+  </joint> -->
   <!-- <link
     name="MPU6050_fl">
     <inertial>
@@ -1306,7 +1384,8 @@
     <axis
       xyz="0 0 0" />
   </joint> -->
-  <link
+
+  <!-- <link
     name="camera_link">
     <inertial>
       <origin
@@ -1570,5 +1649,6 @@
       link="rpi_left_optical" />
     <axis
       xyz="0 0 0" />
-  </joint>
+  </joint> -->
+  
 </robot>

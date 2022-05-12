@@ -28,7 +28,7 @@ int main(int argc, char** argv)
   // MoveIt operates on sets of joints called "planning groups" and stores them in an object called
   // the `JointModelGroup`. Throughout MoveIt the terms "planning group" and "joint model group"
   // are used interchangeably.
-  static const std::string PLANNING_GROUP = "arm";
+  static const std::string PLANNING_GROUP = "arm_eef";
 
   // The :planning_interface:`MoveGroupInterface` class can be easily
   // setup using just the name of the planning group you would like to control and plan for.
@@ -96,15 +96,16 @@ int main(int argc, char** argv)
   // We can plan a motion for this group to a desired pose for the
   // end-effector.
   geometry_msgs::Pose target_pose1;
-  target_pose1.orientation.x = 0.708464;
-  target_pose1.orientation.y = 0.223723;
-  target_pose1.orientation.z = 0.446575;
-  target_pose1.orientation.w = 0.498595;
-  target_pose1.position.x = 0.038818;
-  target_pose1.position.y = -0.138867;
-  target_pose1.position.z = 0.198486;
-  move_group_interface.setApproximateJointValueTarget(target_pose1, "link_5");
-  //move_group_interface.setPositionTarget(0.216288,-0.001021,0.256641,"link_5");
+  target_pose1.orientation.x = -0.649033;
+  target_pose1.orientation.y = 0.759514;
+  target_pose1.orientation.z = 0.020667;
+  target_pose1.orientation.w = 0.038304;
+  target_pose1.position.x = 0.247460;
+  target_pose1.position.y = -0.008218;
+  target_pose1.position.z = -0.001569;
+  //move_group_interface.setPositionTarget(0.3,0.0,0.02,"virtual_eef");
+  //move_group_interface.setApproximateJointValueTarget(target_pose1, "virtual_eef");
+  move_group_interface.setPoseTarget(target_pose1, "virtual_eef");
 
   // Now, we call the planner to compute the plan and visualize it.
   // Note that we are just planning, not asking move_group_interface

@@ -18,3 +18,4 @@ docker.txt
 *.pgm
 **/teleop_twist_keyboard
 **/maps/*
+**/vision_opencv

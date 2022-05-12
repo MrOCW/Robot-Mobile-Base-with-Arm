@@ -7,7 +7,8 @@
   <arg name="map_file" default="$(find navigation)/maps/cw_map.yaml"/>
   <arg name="open_rviz" default="false"/>
   <arg name="teleop" default="true"/>
-  <arg name="cam" default="true"/>
+  <arg name="rpi" default="false"/>
+  <arg name="d455" default="true"/>
 
   <!-- YDLidar -->
   <node name="ydlidar_node"  pkg="ydlidar_ros"  type="ydlidar_node" output="screen" respawn="false" >
@@ -41,6 +42,7 @@
     <param name="use_magnetic_field_msg" value="false" />
     <param name="publish_tf" value="false" />
     <param name="stateless" value="false" />
+    <remap from="/imu/data_raw" to="/camera/imu_ros"/>
   </node>
 
   <!-- rviz -->
@@ -53,7 +55,11 @@
     <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop" output="screen"/>
   </group>
   
-  <group if="$(arg cam)">
+  <group if="$(arg rpi)">
     <include file="$(find gscam)/jetson_stereo.launch"/>
+  </group>
+
+  <group if="$(arg d455)">
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
   </group>
 </launch>

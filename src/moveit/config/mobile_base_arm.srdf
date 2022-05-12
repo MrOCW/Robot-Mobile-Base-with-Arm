@@ -15,12 +15,14 @@
         <link name="link_3"/>
         <link name="link_4"/>
         <link name="link_5"/>
+        <link name="link_6"/>
         <joint name="joint_1"/>
         <joint name="joint_2"/>
         <joint name="joint_3"/>
         <joint name="joint_4"/>
         <joint name="joint_5"/>
-        <chain base_link="base_link" tip_link="link_5"/>
+        <joint name="joint_6"/>
+        <chain base_link="base_link" tip_link="link_6"/>
     </group>
     <group name="arm_eef">
         <link name="link_1"/>
@@ -28,12 +30,14 @@
         <link name="link_3"/>
         <link name="link_4"/>
         <link name="link_5"/>
+        <link name="link_6"/>
         <link name="virtual_eef"/>
         <joint name="joint_1"/>
         <joint name="joint_2"/>
         <joint name="joint_3"/>
         <joint name="joint_4"/>
         <joint name="joint_5"/>
+        <joint name="joint_6"/>
         <joint name="virtual_eef_joint"/>
         <chain base_link="base_link" tip_link="virtual_eef"/>
     </group>
@@ -63,7 +67,7 @@
         <joint name="joint_5" value="0"/>
     </group_state>
     <group_state name="home" group="eef">
-        <joint name="eef_joint_1" value="0.0"/>
+        <joint name="eef_joint_1" value="0"/>
     </group_state>
     <group_state name="closed" group="eef">
         <joint name="eef_joint_1" value="-0.19"/>
@@ -72,106 +76,55 @@
         <joint name="eef_joint_1" value="0.6"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="eef" parent_link="link_5" group="eef" parent_group="arm"/>
+    <end_effector name="eef" parent_link="link_6" group="eef" parent_group="arm"/>
     <end_effector name="arm_eef" parent_link="virtual_eef" group="eef" parent_group="arm_eef"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
-    <disable_collisions link1="MPU9250_fl" link2="base_link" reason="Adjacent"/>
-    <disable_collisions link1="MPU9250_fl" link2="bl_wheel" reason="Never"/>
-    <disable_collisions link1="MPU9250_fl" link2="br_wheel" reason="Never"/>
-    <disable_collisions link1="MPU9250_fl" link2="camera_link" reason="Never"/>
-    <disable_collisions link1="MPU9250_fl" link2="fl_wheel" reason="Never"/>
-    <disable_collisions link1="MPU9250_fl" link2="fr_wheel" reason="Never"/>
-    <disable_collisions link1="MPU9250_fl" link2="lidar_link" reason="Never"/>
-    <disable_collisions link1="MPU9250_fl" link2="link_1" reason="Never"/>
-    <disable_collisions link1="MPU9250_fl" link2="link_2" reason="Never"/>
-    <disable_collisions link1="MPU9250_fl" link2="link_3" reason="Never"/>
-    <disable_collisions link1="MPU9250_fl" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="MPU9250_fl" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="MPU9250_fl" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="MPU9250_fl" link2="rpi_right_optical" reason="Never"/>
     <disable_collisions link1="base_link" link2="bl_wheel" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="br_wheel" reason="Adjacent"/>
-    <disable_collisions link1="base_link" link2="camera_link" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="fl_wheel" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="fr_wheel" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="lidar_link" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="link_1" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="link_2" reason="Never"/>
-    <disable_collisions link1="base_link" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="base_link" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="base_link" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="base_link" link2="rpi_right_optical" reason="Never"/>
     <disable_collisions link1="bl_wheel" link2="br_wheel" reason="Never"/>
-    <disable_collisions link1="bl_wheel" link2="camera_link" reason="Never"/>
-    <disable_collisions link1="bl_wheel" link2="eef_finger_link_2" reason="Never"/>
+    <disable_collisions link1="bl_wheel" link2="eef_link_1" reason="Never"/>
+    <disable_collisions link1="bl_wheel" link2="eef_link_2" reason="Never"/>
     <disable_collisions link1="bl_wheel" link2="fl_wheel" reason="Never"/>
     <disable_collisions link1="bl_wheel" link2="fr_wheel" reason="Never"/>
     <disable_collisions link1="bl_wheel" link2="lidar_link" reason="Never"/>
     <disable_collisions link1="bl_wheel" link2="link_1" reason="Never"/>
     <disable_collisions link1="bl_wheel" link2="link_2" reason="Never"/>
     <disable_collisions link1="bl_wheel" link2="link_3" reason="Never"/>
-    <disable_collisions link1="bl_wheel" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="bl_wheel" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="bl_wheel" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="bl_wheel" link2="rpi_right_optical" reason="Never"/>
-    <disable_collisions link1="br_wheel" link2="camera_link" reason="Never"/>
-    <disable_collisions link1="br_wheel" link2="eef_finger_link_1" reason="Never"/>
+    <disable_collisions link1="bl_wheel" link2="link_4" reason="Never"/>
+    <disable_collisions link1="br_wheel" link2="eef_link_1" reason="Never"/>
     <disable_collisions link1="br_wheel" link2="fl_wheel" reason="Never"/>
     <disable_collisions link1="br_wheel" link2="fr_wheel" reason="Never"/>
     <disable_collisions link1="br_wheel" link2="lidar_link" reason="Never"/>
     <disable_collisions link1="br_wheel" link2="link_1" reason="Never"/>
     <disable_collisions link1="br_wheel" link2="link_2" reason="Never"/>
-    <disable_collisions link1="br_wheel" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="br_wheel" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="br_wheel" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="br_wheel" link2="rpi_right_optical" reason="Never"/>
-    <disable_collisions link1="camera_link" link2="eef_link_1" reason="Never"/>
-    <disable_collisions link1="camera_link" link2="fl_wheel" reason="Never"/>
-    <disable_collisions link1="camera_link" link2="fr_wheel" reason="Never"/>
-    <disable_collisions link1="camera_link" link2="lidar_link" reason="Never"/>
-    <disable_collisions link1="camera_link" link2="link_1" reason="Never"/>
-    <disable_collisions link1="camera_link" link2="link_2" reason="Never"/>
-    <disable_collisions link1="camera_link" link2="link_3" reason="Never"/>
-    <disable_collisions link1="camera_link" link2="link_4" reason="Never"/>
-    <disable_collisions link1="camera_link" link2="rpi_left" reason="Adjacent"/>
-    <disable_collisions link1="camera_link" link2="rpi_left_optical" reason="Adjacent"/>
-    <disable_collisions link1="camera_link" link2="rpi_right" reason="Adjacent"/>
-    <disable_collisions link1="camera_link" link2="rpi_right_optical" reason="Adjacent"/>
-    <disable_collisions link1="camera_link" link2="virtual_eef" reason="Never"/>
+    <disable_collisions link1="br_wheel" link2="link_3" reason="Never"/>
+    <disable_collisions link1="br_wheel" link2="link_6" reason="Never"/>
+    <disable_collisions link1="br_wheel" link2="virtual_eef" reason="Never"/>
     <disable_collisions link1="eef_finger_link_1" link2="eef_link_1" reason="Adjacent"/>
-    <disable_collisions link1="eef_finger_link_1" link2="eef_link_2" reason="Never"/>
-    <disable_collisions link1="eef_finger_link_1" link2="lidar_link" reason="Never"/>
-    <disable_collisions link1="eef_finger_link_1" link2="link_1" reason="Never"/>
-    <disable_collisions link1="eef_finger_link_1" link2="link_2" reason="Never"/>
     <disable_collisions link1="eef_finger_link_1" link2="link_3" reason="Never"/>
     <disable_collisions link1="eef_finger_link_1" link2="link_4" reason="Never"/>
+    <disable_collisions link1="eef_finger_link_1" link2="link_5" reason="Never"/>
     <disable_collisions link1="eef_finger_link_1" link2="virtual_eef" reason="Never"/>
+    <disable_collisions link1="eef_finger_link_2" link2="eef_link_1" reason="Never"/>
     <disable_collisions link1="eef_finger_link_2" link2="eef_link_2" reason="Adjacent"/>
-    <disable_collisions link1="eef_finger_link_2" link2="lidar_link" reason="Never"/>
-    <disable_collisions link1="eef_finger_link_2" link2="link_1" reason="Never"/>
-    <disable_collisions link1="eef_finger_link_2" link2="link_2" reason="Never"/>
     <disable_collisions link1="eef_finger_link_2" link2="link_3" reason="Never"/>
     <disable_collisions link1="eef_finger_link_2" link2="link_4" reason="Never"/>
+    <disable_collisions link1="eef_finger_link_2" link2="link_5" reason="Never"/>
     <disable_collisions link1="eef_finger_link_2" link2="virtual_eef" reason="Never"/>
-    <disable_collisions link1="eef_link_1" link2="lidar_link" reason="Never"/>
-    <disable_collisions link1="eef_link_1" link2="link_1" reason="Never"/>
-    <disable_collisions link1="eef_link_1" link2="link_2" reason="Never"/>
     <disable_collisions link1="eef_link_1" link2="link_3" reason="Never"/>
     <disable_collisions link1="eef_link_1" link2="link_4" reason="Never"/>
     <disable_collisions link1="eef_link_1" link2="link_5" reason="Never"/>
-    <disable_collisions link1="eef_link_1" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="eef_link_1" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="eef_link_1" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="eef_link_1" link2="rpi_right_optical" reason="Never"/>
+    <disable_collisions link1="eef_link_1" link2="link_6" reason="Never"/>
     <disable_collisions link1="eef_link_1" link2="virtual_eef" reason="Adjacent"/>
-    <disable_collisions link1="eef_link_2" link2="lidar_link" reason="Never"/>
-    <disable_collisions link1="eef_link_2" link2="link_1" reason="Never"/>
-    <disable_collisions link1="eef_link_2" link2="link_2" reason="Never"/>
     <disable_collisions link1="eef_link_2" link2="link_3" reason="Never"/>
     <disable_collisions link1="eef_link_2" link2="link_4" reason="Never"/>
     <disable_collisions link1="eef_link_2" link2="link_5" reason="Never"/>
-    <disable_collisions link1="eef_link_2" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="eef_link_2" link2="rpi_left_optical" reason="Never"/>
+    <disable_collisions link1="eef_link_2" link2="link_6" reason="Never"/>
     <disable_collisions link1="eef_link_2" link2="virtual_eef" reason="Adjacent"/>
     <disable_collisions link1="fl_wheel" link2="fr_wheel" reason="Never"/>
     <disable_collisions link1="fl_wheel" link2="lidar_link" reason="Never"/>
@@ -179,66 +132,27 @@
     <disable_collisions link1="fl_wheel" link2="link_2" reason="Never"/>
     <disable_collisions link1="fl_wheel" link2="link_3" reason="Never"/>
     <disable_collisions link1="fl_wheel" link2="link_4" reason="Never"/>
-    <disable_collisions link1="fl_wheel" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="fl_wheel" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="fl_wheel" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="fl_wheel" link2="rpi_right_optical" reason="Never"/>
     <disable_collisions link1="fr_wheel" link2="lidar_link" reason="Never"/>
     <disable_collisions link1="fr_wheel" link2="link_1" reason="Never"/>
     <disable_collisions link1="fr_wheel" link2="link_2" reason="Never"/>
+    <disable_collisions link1="fr_wheel" link2="link_3" reason="Never"/>
     <disable_collisions link1="fr_wheel" link2="link_4" reason="Never"/>
-    <disable_collisions link1="fr_wheel" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="fr_wheel" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="fr_wheel" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="fr_wheel" link2="rpi_right_optical" reason="Never"/>
     <disable_collisions link1="lidar_link" link2="link_1" reason="Never"/>
+    <disable_collisions link1="lidar_link" link2="link_4" reason="Never"/>
     <disable_collisions link1="lidar_link" link2="link_5" reason="Never"/>
-    <disable_collisions link1="lidar_link" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="lidar_link" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="lidar_link" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="lidar_link" link2="rpi_right_optical" reason="Never"/>
-    <disable_collisions link1="lidar_link" link2="virtual_eef" reason="Never"/>
     <disable_collisions link1="link_1" link2="link_2" reason="Adjacent"/>
     <disable_collisions link1="link_1" link2="link_3" reason="Never"/>
     <disable_collisions link1="link_1" link2="link_4" reason="Never"/>
-    <disable_collisions link1="link_1" link2="link_5" reason="Never"/>
-    <disable_collisions link1="link_1" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="link_1" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="link_1" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="link_1" link2="rpi_right_optical" reason="Never"/>
-    <disable_collisions link1="link_1" link2="virtual_eef" reason="Never"/>
     <disable_collisions link1="link_2" link2="link_3" reason="Adjacent"/>
     <disable_collisions link1="link_2" link2="link_4" reason="Never"/>
     <disable_collisions link1="link_2" link2="link_5" reason="Never"/>
-    <disable_collisions link1="link_2" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="link_2" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="link_2" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="link_2" link2="rpi_right_optical" reason="Never"/>
-    <disable_collisions link1="link_2" link2="virtual_eef" reason="Never"/>
     <disable_collisions link1="link_3" link2="link_4" reason="Adjacent"/>
-    <disable_collisions link1="link_3" link2="link_5" reason="Never"/>
-    <disable_collisions link1="link_3" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="link_3" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="link_3" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="link_3" link2="rpi_right_optical" reason="Never"/>
+    <disable_collisions link1="link_3" link2="link_6" reason="Never"/>
     <disable_collisions link1="link_3" link2="virtual_eef" reason="Never"/>
     <disable_collisions link1="link_4" link2="link_5" reason="Adjacent"/>
-    <disable_collisions link1="link_4" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="link_4" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="link_4" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="link_4" link2="rpi_right_optical" reason="Never"/>
+    <disable_collisions link1="link_4" link2="link_6" reason="Never"/>
     <disable_collisions link1="link_4" link2="virtual_eef" reason="Never"/>
-    <disable_collisions link1="link_5" link2="rpi_left" reason="Never"/>
-    <disable_collisions link1="link_5" link2="rpi_left_optical" reason="Never"/>
-    <disable_collisions link1="link_5" link2="virtual_eef" reason="Adjacent"/>
-    <disable_collisions link1="rpi_left" link2="rpi_left_optical" reason="Default"/>
-    <disable_collisions link1="rpi_left" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="rpi_left" link2="rpi_right_optical" reason="Never"/>
-    <disable_collisions link1="rpi_left" link2="virtual_eef" reason="Never"/>
-    <disable_collisions link1="rpi_left_optical" link2="rpi_right" reason="Never"/>
-    <disable_collisions link1="rpi_left_optical" link2="rpi_right_optical" reason="Never"/>
-    <disable_collisions link1="rpi_left_optical" link2="virtual_eef" reason="Never"/>
-    <disable_collisions link1="rpi_right" link2="rpi_right_optical" reason="Default"/>
-    <disable_collisions link1="rpi_right" link2="virtual_eef" reason="Never"/>
-    <disable_collisions link1="rpi_right_optical" link2="virtual_eef" reason="Never"/>
+    <disable_collisions link1="link_5" link2="link_6" reason="Adjacent"/>
+    <disable_collisions link1="link_5" link2="virtual_eef" reason="Never"/>
+    <disable_collisions link1="link_6" link2="virtual_eef" reason="Adjacent"/>
 </robot>

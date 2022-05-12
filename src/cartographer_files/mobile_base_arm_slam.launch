@@ -52,6 +52,7 @@
     <param name="use_magnetic_field_msg" value="false" />
     <param name="publish_tf" value="false" />
     <param name="stateless" value="false" />
+    <remap from="/imu/data_raw" to="/camera/imu_ros"/>
     <remap from="imu/data" to="imu" /> 
   </node>
 
