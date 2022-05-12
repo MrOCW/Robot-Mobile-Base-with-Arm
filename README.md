@@ -1,5 +1,5 @@
-## Mobile Robot with 5 DoF Arm
-This project consists of code for SLAM, Autonomous Navigation, and [5 DoF Arm](https://howtomechatronics.com/tutorials/arduino/diy-arduino-robot-arm-with-smartphone-control/) Manipulation.  
+## Mobile Robot with 6 DoF Arm
+This project consists of code for SLAM, Autonomous Navigation, and [6 DoF Arm](https://howtomechatronics.com/tutorials/arduino/diy-arduino-robot-arm-with-smartphone-control/) Manipulation.  
 
 ## Hardware
 - NVIDIA Jetson Nano 4GB  

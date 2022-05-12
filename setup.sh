@@ -65,13 +65,23 @@ then
     git clone https://github.com/YDLIDAR/ydlidar_ros
     cd ..
 
+    sudo rm -rf realsense-ros
+    git clone https://github.com/IntelRealSense/realsense-ros.git
+    sudo mv realsense-files/imu_optical_to_ros.cpp realsense-ros/realsense2_camera/src/imu_optical_to_ros.cpp
+    sudo mv realsense-files/rs_camera.launch realsense-ros/realsense2_camera/launch/rs_camera.launch
+    sudo mv realsense-files/CMakeLists.txt realsense-ros/realsense2_camera/CMakeLists.txt
+
+    sudo rm -rf rtabmap_ros
+    git clone https://github.com/introlab/rtabmap_ros
+    sudo mv rtabmap-files/rgbd_vo.launch rtabmap_ros/launch/rgbd_vo.launch
+    sudo mv rtabmap-files/CMakeLists.txt rtabmap_ros/CMakeLists.txt
+    
     rosdep update
     rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -y
     
-    catkin_make_isolated --install --use-ninja
+    catkin_make_isolated -DCATKIN_ENABLE_TESTING=False -DCMAKE_BUILD_TYPE=Release --install --use-ninja
     echo "Setup complete! Please edit ESP32_Control/lib/ros_lib/ros.h to include \"ArduinoHardware.h\" if using UART/Serial"
 else
     echo "Terminated"
 fi
-
 
