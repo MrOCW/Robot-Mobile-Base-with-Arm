@@ -1,15 +1,17 @@
-#include <Arduino.h>
+#include <micro_ros_arduino.h>
+#include <stdio.h>
+#include <rcl/rcl.h>
+#include <rcl/error_handling.h>
+#include <rclc/rclc.h>
+#include <rclc/executor.h>
+#include <micro_ros_utilities/string_utilities.h>
 #include <Servo.h>
 #include <DRV8833_MCPWM.h>
 #include <drive.h>
-#include <ros.h>
-#include <time.h>
-#include <sensor_msgs/JointState.h>
-#include <sensor_msgs/Imu.h>
-#include <geometry_msgs/Twist.h>
-#include <geometry_msgs/Vector3.h>
-#include <std_msgs/String.h>
-//#include <MPU9250.h>
+#include <geometry_msgs/msg/twist.h>
+#include <sensor_msgs/msg/imu.h>
+#include <sensor_msgs/msg/joint_state.h>
+#include <WiFi.h>
 
 bool debug = true;
 
@@ -40,67 +42,113 @@ const int br2 = 16;
 const int sleepl = 17;
 const int sleepr = 15;
 
+//extern "C" int clock_gettime(clockid_t unused, struct timespec *tp);
 DRV8833 DRV8833_L;
 DRV8833 DRV8833_R;
 Drive drive;
-bool check_zero_speeds(float speeds[])
-{
-  for (int speed = 0; speed<4; speed++)
-  {
-    if (speeds[speed] != 0)
-    {
-      return false;
-    }
-  }
-  return true;     
-}
+
+rcl_timer_t timer;
+rcl_subscription_t joint_state_subscriber, cmd_vel_subscriber;
+rclc_executor_t executor;
+rcl_allocator_t allocator;
+rclc_support_t support;
+rcl_node_t node;
+sensor_msgs__msg__JointState joint_state_msg;
+geometry_msgs__msg__Twist cmd_vel_msg;
+
+bool micro_ros_init_successful;
+#define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK) && (debug == true)){return Serial.printf("Failed at line %d\n",__LINE__);}}
+
 int rad2deg(double radian)
 {
   int degree = static_cast<int>(radian * (180 / 3.14159));
   return degree+90;
 }
 
-void joint_states_cb(const sensor_msgs::JointState &joint_states_msg)
+void joint_states_cb(const void *msgin)
 {
-  servo1.write(rad2deg(joint_states_msg.position[4]));
-  servo2.write(rad2deg(joint_states_msg.position[5]));
-  servo3.write(180-rad2deg(joint_states_msg.position[6]));
-  servo4.write(rad2deg(joint_states_msg.position[7]));
-  servo5.write(rad2deg(joint_states_msg.position[8]));
-  servo6.write(rad2deg(joint_states_msg.position[9]));
+  const sensor_msgs__msg__JointState * joint_states_msg = (const sensor_msgs__msg__JointState *)msgin;
+  servo1.write(rad2deg(joint_states_msg->position.data[4]));
+  servo2.write(rad2deg(joint_states_msg->position.data[5]));
+  servo3.write(180-rad2deg(joint_states_msg->position.data[6]));
+  servo4.write(rad2deg(joint_states_msg->position.data[7]));
+  servo5.write(rad2deg(joint_states_msg->position.data[8]));
+  servo6.write(rad2deg(joint_states_msg->position.data[9]));
 
 }
 
-void cmd_vel_cb(const geometry_msgs::Twist &cmd_vel_msg)
+void cmd_vel_cb(const void *msgin)
 {
+  const geometry_msgs__msg__Twist * cmd_vel_msg = (const geometry_msgs__msg__Twist *)msgin;
   digitalWrite(sleepl,HIGH);
   digitalWrite(sleepr,HIGH);
-  drive.drive(cmd_vel_msg.linear.x,cmd_vel_msg.linear.y,cmd_vel_msg.angular.z);
+  drive.drive(cmd_vel_msg->linear.x,cmd_vel_msg->linear.y,cmd_vel_msg->angular.z);
 }
-//MPU9250 IMU(i2c0,0x68);
 
-ros::NodeHandle nh;
-ros::Subscriber<sensor_msgs::JointState> joint_sub("/joint_states", joint_states_cb );
-ros::Subscriber<geometry_msgs::Twist> cmd_vel_sub("/cmd_vel", cmd_vel_cb );
-//sensor_msgs::Imu imu_raw;
-//ros::Publisher imu_pub("/imu/data_raw", &imu_raw);
-//ros::Time ros_time;
+void timer_cb(rcl_timer_t * timer, int64_t last_call_time)
+{
+  RCLC_UNUSED(last_call_time);
+  if (timer != NULL) 
+  {
+    
+  }
+}
+
+
+bool create_entities()
+{	
+	allocator = rcl_get_default_allocator();
+
+	// create init_options
+	RCCHECK(rclc_support_init(&support, 0, NULL, &allocator));
+
+	// create node
+	RCCHECK(rclc_node_init_default(&node, "micro_ros_node", "", &support));
+
+  // create subscriber
+  rclc_subscription_init_default(&joint_state_subscriber, 
+                                &node,ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, JointState),
+                                "/joint_states");
+
+  rclc_subscription_init_default(&cmd_vel_subscriber,
+                                &node,
+                                ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, Twist),
+                                "/cmd_vel");
+
+  const unsigned int timer_timeout = 10;
+  RCCHECK(rclc_timer_init_default(
+    &timer,
+    &support,
+    RCL_MS_TO_NS(timer_timeout),
+    timer_cb));
+
+	// create executor
+	executor = rclc_executor_get_zero_initialized_executor();
+	rclc_executor_init(&executor, &support.context, 3, &allocator);
+  RCCHECK(rclc_executor_add_timer(&executor, &timer));
+  RCCHECK(rclc_executor_add_subscription(&executor, &cmd_vel_subscriber, &cmd_vel_msg, &cmd_vel_cb, ON_NEW_DATA));
+  RCCHECK(rclc_executor_add_subscription(&executor, &joint_state_subscriber, &joint_state_msg, &joint_states_cb, ON_NEW_DATA));
+  
+
+	micro_ros_init_successful = true;
+  if (debug == true)
+  {
+    Serial.println("Publishers & Subscribers are initialized");
+  }
+}
+
 
 void setup()
 {
-  int status = IMU.begin();
+  //init_i2c();
+  set_microros_transports();
+  micro_ros_init_successful = false;
+
   if (debug == true)
   {
     Serial.begin(115200);
-    // if (status < 0)
-    // {
-    //   Serial.println("IMU initialization unsuccessful");
-    //   Serial.println("Check IMU wiring or try cycling power");
-    //   Serial.print("Status: ");
-    //   Serial.println(status);
-    // }
   }
-  
+
   pinMode(sleepl,OUTPUT);
   pinMode(sleepr,OUTPUT);
 
@@ -129,13 +177,7 @@ void setup()
   servo5.write(90);
   servo6.write(90);
   servo7.write(90);
-
-  nh.getHardware()->setBaud(115200);
-  nh.initNode();
-  nh.subscribe(joint_sub);
-  nh.subscribe(cmd_vel_sub);
-  // imu_raw.header.frame_id = "MPU9250_fl";
-  // nh.advertise(imu_pub);
+  
   //    Wheels
   // L  Front  R
   // 0,0    1,0
@@ -144,62 +186,49 @@ void setup()
   DRV8833_R.attach(1,fr1,fr2,br1,br2,sleepr); // Driver 2, MCPWM Unit 1, Timer 0 & 1
   drive.attach(DRV8833_L,DRV8833_R);
 
-  //   // setting the accelerometer full scale range to +/-8G
-  // IMU.setAccelRange(MPU9250::ACCEL_RANGE_2G);
-  // // setting the gyroscope full scale range to +/-500 deg/s
-  // IMU.setGyroRange(MPU9250::GYRO_RANGE_250DPS);
-  // // setting DLPF bandwidth to 20 Hz
-  // IMU.setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_41HZ);
-  // // setting SRD to 19 for a 50 Hz update rate
-  // IMU.setSrd(19);
-  // IMU.calibrateAccel();
-  // IMU.calibrateMag();
-}
-
-void loop()
-{
-  // // read the sensor
-  // ros_time = nh.now();
-  // /*if (check_zero_speeds(drive.speeds))
-  // { // might cause further drift due to ignoring deceleration?
-  //   imu_raw.linear_acceleration.x = 0;
-  //   imu_raw.linear_acceleration.y = 0;
-  //   imu_raw.linear_acceleration.z = 9.80665f; // set to 9.81 since we are dealing with 2D only
-  //   imu_raw.angular_velocity.x = 0;
-  //   imu_raw.angular_velocity.y = 0;
-  //   imu_raw.angular_velocity.z = 0;
-  //   imu_raw.header.stamp.sec = ros_time.sec;
-  //   imu_raw.header.stamp.nsec = ros_time.nsec;
-  //   imu_raw.orientation_covariance[0] = -1;
-  // }
-  // else
-  // {*/
-  // IMU.readSensor();
-  // imu_raw.linear_acceleration.x = -IMU.getAccelX_mss();
-  // imu_raw.linear_acceleration.y = IMU.getAccelY_mss();
-  // imu_raw.linear_acceleration.z = 9.80665f; // set to 9.81 since we are dealing with 2D only
-  // imu_raw.angular_velocity.x = IMU.getGyroX_rads();
-  // imu_raw.angular_velocity.y = IMU.getGyroY_rads();
-  // imu_raw.angular_velocity.z = -IMU.getGyroZ_rads();
-  // imu_raw.header.stamp.sec = ros_time.sec;
-  // imu_raw.header.stamp.nsec = ros_time.nsec;
-  // imu_raw.orientation_covariance[0] = -1;
-  // //}
-  
-  
-  // if (debug==true)
+  // if (RMW_RET_OK != rmw_uros_sync_session(500) && debug == true)
   // {
-  //   Serial.printf("Accel(%.6lf, %.6lf, %.6lf) Gyro(%.6lf, %.6lf, %.6lf) Mag(%.6f, %.6f, %.6f), Yaw: %6.f\n",\
-  //   IMU.getAccelX_mss(), IMU.getAccelY_mss(), IMU.getAccelZ_mss(),\
-  //   IMU.getGyroX_rads(), IMU.getGyroY_rads(), IMU.getGyroZ_rads(),\
-  //   IMU.getMagX_uT(), IMU.getMagY_uT(), IMU.getMagZ_uT(),\
-  //   float(atan2(IMU.getMagY_uT(), IMU.getMagX_uT())) * RAD_TO_DEG);
+  //   Serial.println("Time failed to sync");
   // }
 
-  // imu_pub.publish(&imu_raw);
-  nh.spinOnce();
-  delay(1);
 }
 
+void destroy_entities()
+{
+  rcl_subscription_fini(&cmd_vel_subscriber, &node);
+  rcl_subscription_fini(&joint_state_subscriber, &node);
+  rcl_node_fini(&node);
+  rcl_timer_fini(&timer);
+  rclc_executor_fini(&executor);
+  rclc_support_fini(&support);
 
-
+  micro_ros_init_successful = false;
+}
+void loop() 
+{
+    static unsigned long long prev_connect_test_time;
+    // check if the agent got disconnected at 10Hz
+    if(micros() - prev_connect_test_time > 50000)
+    {
+      prev_connect_test_time = micros();
+      // check if the agent is connected
+      if(RMW_RET_OK == rmw_uros_ping_agent(50, 2))
+      {
+        // reconnect if agent got disconnected or haven't at all
+        if (!micro_ros_init_successful) 
+        {
+          create_entities();
+        } 
+      } 
+      else if(micro_ros_init_successful)
+      {
+        // clean up micro-ROS components
+        destroy_entities();
+      }
+    }
+    
+    if(micro_ros_init_successful)
+    {
+      rclc_executor_spin_some(&executor, RCL_MS_TO_NS(10));
+    }
+}

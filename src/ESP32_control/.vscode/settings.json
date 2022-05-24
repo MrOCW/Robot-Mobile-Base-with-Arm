@@ -3,6 +3,18 @@
         "sstream": "cpp",
         "typeinfo": "cpp",
         "*.tcc": "cpp",
-        "ostream": "cpp"
-    }
+        "ostream": "cpp",
+        "array": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "memory": "cpp",
+        "random": "cpp",
+        "initializer_list": "cpp",
+        "cmath": "cpp"
+    },
+    "idf.port": "/dev/ttyUSB0"
 }

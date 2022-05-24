@@ -8,19 +8,19 @@ int vel2pwm(float speed)
     int pwm = 0;
     if (speed<0)
     {
-        pwm = (speed-2.9)/0.21;
+        pwm = (speed-4)/0.2666666667;
     }
     else if (speed>0)
     {
-        pwm = (speed+2.9)/0.21;
+        pwm = (speed+4)/0.2666666667;
     }
-    if (pwm > 80)
+    if (pwm > 100)
     {
-        pwm = 80;
+        pwm = 100;
     }
-    else if (pwm<-80)
+    else if (pwm<-100)
     {
-        pwm = -80;
+        pwm = -100;
     }
     return pwm;
 }
@@ -32,8 +32,8 @@ void Drive::attach(DRV8833 driver1, DRV8833 driver2)
 
 const float R = 0.030;
 const float L = 0.078;
-const float W = 0.1265;
-const uint8_t MIN_PWM = 35;
+const float W = 0.146;
+
 // Converts vx,vy,wz into wheel rotational velocity, a short burst at full speed is provided to overcome initial resistance
 void Drive::drive(float vx,float vy,float wz)
 {
@@ -51,15 +51,9 @@ void Drive::drive(float vx,float vy,float wz)
         if (speeds[0] == 0)
         {
             driver1.forward(0,100);
-            delay(30);
-        }
-        if (fl_pwm<MIN_PWM)
-        {
-            fl_pwm = MIN_PWM;
+            delay(10);
         }
         driver1.forward(0,fl_pwm);
-        //driver1.forward(0,30);
-
     }
     else if (fl==0)
     {
@@ -70,13 +64,9 @@ void Drive::drive(float vx,float vy,float wz)
         if (speeds[0]==0)
         {
             driver1.reverse(0,100);
-            delay(30);
+            delay(10);
         }
-        if (fl_pwm>-MIN_PWM)
-        {
-            fl_pwm = -MIN_PWM;
-        }
-        driver1.reverse(0,(-fl_pwm));
+        driver1.reverse(0,-fl_pwm);
     }
 
 
@@ -85,14 +75,9 @@ void Drive::drive(float vx,float vy,float wz)
         if (speeds[1]==0)
         {
             driver2.forward(0,100);
-            delay(30);
+            delay(10);
         }
-        if (fr_pwm<MIN_PWM)
-        {
-            fr_pwm = MIN_PWM;
-        }
-        driver2.forward(0,fr_pwm+9);
-        //driver2.forward(0,50);
+        driver2.forward(0,fr_pwm);
     }
     else if (fr==0)
     {
@@ -103,13 +88,9 @@ void Drive::drive(float vx,float vy,float wz)
         if (speeds[1]==0)
         {
             driver2.reverse(0,100);
-            delay(30);
+            delay(10);
         }
-        if (fr_pwm>-MIN_PWM)
-        {
-            fr_pwm = -MIN_PWM;
-        }
-        driver2.reverse(0,-fr_pwm+9);
+        driver2.reverse(0,-fr_pwm);
     }
 
 
@@ -118,14 +99,9 @@ void Drive::drive(float vx,float vy,float wz)
         if (speeds[3]==0)
         {
             driver1.forward(1,100);
-            delay(30);
+            delay(10);
         }
-        if (bl_pwm<MIN_PWM)
-        {
-            bl_pwm = MIN_PWM;
-        }
-        driver1.forward(1,bl_pwm);
-       //driver1.forward(1,50);
+        driver1.forward(1,bl_pwm-1);
     }
     else if (bl==0)
     {
@@ -136,13 +112,9 @@ void Drive::drive(float vx,float vy,float wz)
         if (speeds[3]==0)
         {
             driver1.reverse(1,100);
-            delay(30);
+            delay(10);
         }
-        if (bl_pwm>-MIN_PWM)
-        {
-            bl_pwm = -MIN_PWM;
-        }
-        driver1.reverse(1,(-bl_pwm));
+        driver1.reverse(1,-bl_pwm-1);
     }
 
 
@@ -151,14 +123,9 @@ void Drive::drive(float vx,float vy,float wz)
         if (speeds[2]==0)
         {
             driver2.forward(1,100);
-            delay(30);
+            delay(10);
         }
-        if (br_pwm<MIN_PWM)
-        {
-            br_pwm = MIN_PWM;
-        }
-        driver2.forward(1,br_pwm+9);
-        //driver2.forward(1,50);
+        driver2.forward(1,br_pwm);
     }
     else if (br==0)
     {
@@ -169,13 +136,9 @@ void Drive::drive(float vx,float vy,float wz)
         if (speeds[2]==0)
         {
             driver2.reverse(1,100);
-            delay(30);
+            delay(10);
         }
-        if (br_pwm>-MIN_PWM)
-        {
-            br_pwm = -MIN_PWM;
-        }
-        driver2.reverse(1,-br_pwm+9);
+        driver2.reverse(1,-br_pwm);
     }
     speeds[0] = fl;
     speeds[1] = fr;
@@ -192,5 +155,4 @@ void Drive::stop()
     driver1.sleep();
     driver2.sleep();
 }
-
 

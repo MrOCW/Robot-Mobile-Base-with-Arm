@@ -34,7 +34,7 @@ IN THE SOFTWARE.
  * I2Cbus
  * ^^^^^^ */
 namespace i2cbus {
-constexpr uint32_t kDefaultClockSpeed = 400000;  /*!< Clock speed in Hz, default: 100KHz */
+constexpr uint32_t kDefaultClockSpeed = 100000;  /*!< Clock speed in Hz, default: 100KHz */
 constexpr uint32_t kDefaultTimeout = 1000;       /*!< Timeout in milliseconds, default: 1000ms */
 class I2C;
 }  // namespace i2cbus
