@@ -17,5 +17,5 @@ docker.txt
 *.vscode
 *.pgm
 **/teleop_twist_keyboard
-**/maps/*
 **/vision_opencv
+**/cw_map.yaml

@@ -61,5 +61,22 @@
 
   <group if="$(arg d455)">
     <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
+
+    <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+        <arg name="args" value="--delete_db_on_start"/>
+        <arg name="rgb_topic" value="/camera/color/image_raw"/>
+        <arg name="depth_topic" value="/camera/aligned_depth_to_color/image_raw"/>
+        <arg name="camera_info_topic" value="/camera/color/camera_info"/>
+        <arg name="depth_camera_info_topic" value="/camera/depth/camera_info"/>
+        <arg name="localization" value="true"/>
+        <arg name="rtabmapviz" value="false"/>
+        <arg name="rviz" value="false"/>
+        <arg name="frame_id"                default="base_link"/>     <!-- Fixed frame id, you may set "base_link" or "base_footprint" if they are published -->
+        <arg name="odom_frame_id"           default=""/>                <!-- If set, TF is used to get odometry instead of the topic -->
+        <param name="publish_null_when_lost"      type="bool"   value="false"/>
+        <param name="Odom/ResetCountdown" value="1"/>
+    </include>
+
+    <node pkg="navigation" type="subscribe_initialpose" name="ipose_rtabipose"/>
   </group>
 </launch>

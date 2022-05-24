@@ -6,6 +6,7 @@
     textfile="$(find mobile_base_arm)/urdf/mobile_base_arm.urdf" />
   <arg name="map_file" default="$(find navigation)/maps/cw_map.yaml"/>
   <arg name="open_rviz" default="true"/>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_camera_link" args="0.1083660968 0.0475 0.0501 0 0 0 base_link camera_link" />
 
   <!-- move_base -->
   <include file="$(find navigation)/launch/move_base.launch">
@@ -41,14 +42,5 @@
 
   <node pkg="rviz" type="rviz" name="rviz" required="true"
           args="-d $(find navigation)/rviz/navigation.rviz"/>
-
-  <!-- <node pkg="stereo_image_proc" type="stereo_image_proc" name="stereo_image_proc" output="screen" ns="stereo">
-    <param name="approximate_sync"  value="true"/>
-    <param name="min_disparity"     value="12"/>
-    <param name="disparity_range"   value="96"/>
-    <param name="texture_threshold" value="100"/>
-    <param name="speckle_size"      value="200"/>
-    <param name="queue_size"        value="10"/>
-  </node> -->
 
 </launch>

@@ -11,8 +11,6 @@ Panels:
         - /Local Map1/Polygon1
         - /Local Map1/Costmap1
         - /Local Map1/Planner1
-        - /Image1
-        - /Image1/Status1
       Splitter Ratio: 0.5
     Tree Height: 515
   - Class: rviz/Selection
@@ -68,27 +66,17 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        MPU9250_fl:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        bl_wheel_link:
+        bl_wheel:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        br_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_link:
+        br_wheel:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -113,12 +101,12 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        fl_wheel_link:
+        fl_wheel:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        fr_wheel_link:
+        fr_wheel:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -153,22 +141,12 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        rgb_left_link:
+        link_6:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        rgb_left_link_optical:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rgb_right_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rgb_right_link_optical:
+        virtual_eef:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -184,13 +162,31 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        MPU9250_fl:
-          Value: true
         base_link:
           Value: true
-        bl_wheel_link:
+        bl_wheel:
           Value: true
-        br_wheel_link:
+        br_wheel:
+          Value: true
+        camera_accel_frame:
+          Value: true
+        camera_accel_optical_frame:
+          Value: true
+        camera_aligned_depth_to_color_frame:
+          Value: true
+        camera_color_frame:
+          Value: true
+        camera_color_optical_frame:
+          Value: true
+        camera_depth_frame:
+          Value: true
+        camera_depth_optical_frame:
+          Value: true
+        camera_gyro_frame:
+          Value: true
+        camera_imu_optical_frame:
+          Value: true
+        camera_imu_ros_frame:
           Value: true
         camera_link:
           Value: true
@@ -202,9 +198,9 @@ Visualization Manager:
           Value: true
         eef_link_2:
           Value: true
-        fl_wheel_link:
+        fl_wheel:
           Value: true
-        fr_wheel_link:
+        fr_wheel:
           Value: true
         lidar_link:
           Value: true
@@ -218,17 +214,13 @@ Visualization Manager:
           Value: true
         link_5:
           Value: true
+        link_6:
+          Value: true
         map:
           Value: true
         odom:
           Value: true
-        rgb_left_link:
-          Value: true
-        rgb_left_link_optical:
-          Value: true
-        rgb_right_link:
-          Value: true
-        rgb_right_link_optical:
+        virtual_eef:
           Value: true
       Marker Alpha: 1
       Marker Scale: 0.30000001192092896
@@ -240,24 +232,29 @@ Visualization Manager:
         map:
           odom:
             base_link:
-              MPU9250_fl:
+              bl_wheel:
                 {}
-              bl_wheel_link:
-                {}
-              br_wheel_link:
+              br_wheel:
                 {}
               camera_link:
-                rgb_left_link:
+                camera_accel_frame:
+                  camera_accel_optical_frame:
+                    {}
+                camera_aligned_depth_to_color_frame:
+                  camera_color_optical_frame:
+                    {}
+                camera_color_frame:
                   {}
-                rgb_left_link_optical:
-                  {}
-                rgb_right_link:
-                  {}
-                rgb_right_link_optical:
-                  {}
-              fl_wheel_link:
+                camera_depth_frame:
+                  camera_depth_optical_frame:
+                    {}
+                camera_gyro_frame:
+                  camera_imu_optical_frame:
+                    camera_imu_ros_frame:
+                      {}
+              fl_wheel:
                 {}
-              fr_wheel_link:
+              fr_wheel:
                 {}
               lidar_link:
                 {}
@@ -266,12 +263,14 @@ Visualization Manager:
                   link_3:
                     link_4:
                       link_5:
-                        eef_link_1:
-                          eef_finger_link_1:
-                            {}
-                        eef_link_2:
-                          eef_finger_link_2:
-                            {}
+                        link_6:
+                          virtual_eef:
+                            eef_link_1:
+                              eef_finger_link_1:
+                                {}
+                            eef_link_2:
+                              eef_finger_link_2:
+                                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -471,46 +470,6 @@ Visualization Manager:
       Topic: /move_base/TebLocalPlannerROS/teb_poses
       Unreliable: false
       Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/PointCloud2
-      Color: 255; 255; 255
-      Color Transformer: ""
-      Decay Time: 0
-      Enabled: false
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Min Color: 0; 0; 0
-      Name: PointCloud2
-      Position Transformer: ""
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.009999999776482582
-      Style: Flat Squares
-      Topic: /points2
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: false
-    - Class: rviz/Image
-      Enabled: false
-      Image Topic: /stereo/right/image_raw
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Image
-      Normalize Range: true
-      Queue Size: 10
-      Transport Hint: compressed
-      Unreliable: false
-      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -535,7 +494,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.7740325927734375
+      Distance: 0.964354395866394
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -543,17 +502,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.0990552008152008
-        Y: 0.7267900705337524
-        Z: 0.00010387013026047498
+        X: -0.41097015142440796
+        Y: 0.06608562171459198
+        Z: -0.03167121112346649
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5697963237762451
+      Pitch: 0.1197977066040039
       Target Frame: <Fixed Frame>
-      Yaw: 3.148198127746582
+      Yaw: 6.19325065612793
     Saved: ~
 Window Geometry:
   Displays:
@@ -561,9 +520,7 @@ Window Geometry:
   Height: 744
   Hide Left Dock: false
   Hide Right Dock: false
-  Image:
-    collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001560000028efc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d0000028e000000c900fffffffb0000000a0049006d00610067006500000001ff000000cc0000001600fffffffb0000000a0049006d0061006700650000000330000000ce0000000000000000fb0000000a0049006d006100670065010000023900000092000000000000000000000001000001000000028efc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003d0000028e000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004a00000003efc0100000002fb0000000800540069006d00650000000000000004a0000004f300fffffffb0000000800540069006d00650100000000000004500000000000000000000002b30000028e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001560000028efc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d0000028e000000c900fffffffb0000000a0049006d00610067006500000001ff000000cc0000000000000000fb0000000a0049006d0061006700650000000330000000ce0000000000000000fb0000000a0049006d006100670065010000023900000092000000000000000000000001000001000000028efc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003d0000028e000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004a00000003efc0100000002fb0000000800540069006d00650000000000000004a0000004f300fffffffb0000000800540069006d00650100000000000004500000000000000000000002b30000028e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:

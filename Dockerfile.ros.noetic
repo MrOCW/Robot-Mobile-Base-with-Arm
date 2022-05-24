@@ -27,6 +27,7 @@ RUN apt-get update && \
     rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -y && \
     src/cartographer/scripts/install_abseil.sh && \
     sudo mv src/cartographer_files/mobile_base_arm.lua src/cartographer_ros/cartographer_ros/configuration_files/mobile_base_arm.lua && \
+    sudo mv src/cartographer_files/mobile_base_arm.rviz src/cartographer_ros/cartographer_ros/configuration_files/mobile_base_arm.rviz && \
     sudo mv src/cartographer_files/mobile_base_arm_slam.launch src/cartographer_ros/cartographer_ros/launch/mobile_base_arm_slam.launch && \
     sudo rm -rf src/cartographer_files && \
     sudo apt-get --no-install-recommends install -y ros-${ROS_DISTRO}-imu-tools && \
@@ -39,7 +40,20 @@ RUN apt-get update && \
     cd src && \
     sudo rm -rf ydlidar_ros && \
     git clone https://github.com/YDLIDAR/ydlidar_ros && \
+    sudo rm -rf realsense-ros && \
+    git clone https://github.com/IntelRealSense/realsense-ros.git && \
+    sudo mv realsense-files/imu_optical_to_ros.cpp realsense-ros/realsense2_camera/src/imu_optical_to_ros.cpp && \
+    sudo mv realsense-files/rs_camera.launch realsense-ros/realsense2_camera/launch/rs_camera.launch && \
+    sudo mv realsense-files/CMakeLists.txt realsense-ros/realsense2_camera/CMakeLists.txt && \
+    sudo rm -rf realsense-files && \
+    sudo rm -rf rtabmap_ros && \
+    git clone https://github.com/introlab/rtabmap_ros && \
+    sudo mv rtabmap-files/rgbd_vo.launch rtabmap_ros/launch/rgbd_vo.launch && \
+    sudo mv rtabmap-files/CMakeLists.txt rtabmap_ros/CMakeLists.txt && \
+    sudo rm -rf rtabmap-files && \
     cd .. && \
-    catkin_make_isolated --install --use-ninja
+    rosdep update && \
+    rosdep install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -y && \
+    catkin_make_isolated -DCATKIN_ENABLE_TESTING=False -DCMAKE_BUILD_TYPE=Release --install --use-ninja
     
 WORKDIR /workspace/Robot-Mobile-Base-with-Arm

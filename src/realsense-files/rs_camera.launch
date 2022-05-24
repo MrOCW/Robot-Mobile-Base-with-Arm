@@ -151,5 +151,5 @@
 
   <node name="imu_optical_to_ros" type="imu_optical_to_ros" pkg="realsense2_camera" />
 
-  <rosparam> /camera/stereo_module/emitter_enabled: 2</rosparam>
+  <!-- <rosparam> /camera/stereo_module/emitter_enabled: 2</rosparam> -->
 </launch>
