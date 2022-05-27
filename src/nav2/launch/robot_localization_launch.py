@@ -5,8 +5,7 @@ import launch_ros
 import os
 
 def generate_launch_description():
-  launch.actions.DeclareLaunchArgument(name='use_sim_time', default_value='True',
-                                              description='Flag to enable use_sim_time')
+
   imu_filter_node = launch_ros.actions.Node(
     package='imu_filter_madgwick',
     executable='imu_filter_madgwick_node',
@@ -26,7 +25,7 @@ def generate_launch_description():
   )
 
   return launch.LaunchDescription([
-    launch.actions.DeclareLaunchArgument(name='use_sim_time', default_value='True',
+    launch.actions.DeclareLaunchArgument(name='use_sim_time', default_value='False',
                                         description='Flag to enable use_sim_time'),
     imu_filter_node,
     robot_localization_node,
