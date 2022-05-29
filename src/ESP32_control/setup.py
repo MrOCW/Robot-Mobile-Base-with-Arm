@@ -15,12 +15,13 @@ setup(
     zip_safe=True,
     maintainer='ocw',
     maintainer_email='ocw_97@hotmail.com',
-    description='Package to communicate with ESP32 via MQTT',
+    description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'ros2_mqtt = ESP32_control.ros2_mqtt:main'
+            'ros2_mqtt = ESP32_control.ros2_mqtt:main',
+            'ros2_serial = ESP32_control.ros2_serial:main'
         ],
     },
 )

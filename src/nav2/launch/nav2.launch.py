@@ -56,7 +56,13 @@ def generate_launch_description():
                 'use_sim_time': use_sim_time,
                 'params_file': param_dir}.items(),
         ),
-
+        Node(package='nav2',
+             executable='subscribe_initialpose',
+             name='rtab_subscribe_initialpose'),
+        Node(package='teleop_twist_keyboard',
+             executable='teleop_twist_keyboard'),
+        Node(package='ESP32_control',
+             executable='ros2_mqtt'),
         Node(
             package='rviz2',
             executable='rviz2',

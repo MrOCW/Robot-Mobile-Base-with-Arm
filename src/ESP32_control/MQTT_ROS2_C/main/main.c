@@ -176,8 +176,9 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     case MQTT_EVENT_DATA:
         ESP_LOGI(MQTTTAG, "MQTT_EVENT_DATA");
         printf("TOPIC=%.*s\r\n", event->topic_len, event->topic);
-        if (strcmp(event->topic, "/cmd_vel"))
+        if (strcmp(event->topic, "cmd_vel"))
         {
+            printf("Size: %d\n",sizeof(event->data)*event->data_len);
             char* cmd_vel_data = strtok(event->data," ");
             float vx = strtof(cmd_vel_data,NULL);
             printf("lin_x = %f\n",vx);
@@ -188,6 +189,11 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
             float wz = strtof(cmd_vel_data,NULL);
             printf("ang_z = %f\n",wz);
             drive(vx,vy,wz);
+        }
+        if (strcmp(event->topic,"joint_state"))
+        {
+            printf("Size: %d\n",sizeof(event->data)*event->data_len);
+            char* joint_state_data = strtok(event->data," ");
         }
         break;
     case MQTT_EVENT_ERROR:
@@ -212,6 +218,7 @@ static void mqtt_start(void)
         //.uri = "mqtt://mqtt.eclipseprojects.io",
         .host = "***********",
         .port = 1883,
+        .buffer_size = 128,
     };
     esp_mqtt_client_handle_t client = esp_mqtt_client_init(&mqtt_cfg);
     esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, client);
