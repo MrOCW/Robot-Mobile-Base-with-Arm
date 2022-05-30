@@ -10,7 +10,7 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
-    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='False')
     map_dir = LaunchConfiguration(
         'map',
         default=os.path.join(
@@ -29,9 +29,9 @@ def generate_launch_description():
     nav2_launch_file_dir = os.path.join(get_package_share_directory('nav2_bringup'), 'launch')
 
     rviz_config_dir = os.path.join(
-        get_package_share_directory('nav2_bringup'),
+        get_package_share_directory('nav2'),
         'rviz',
-        'nav2_default_view.rviz')
+        'nav2.rviz')
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -46,7 +46,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             'use_sim_time',
-            default_value='false',
+            default_value='False',
             description='Use simulation (Gazebo) clock if true'),
 
         IncludeLaunchDescription(
@@ -59,10 +59,7 @@ def generate_launch_description():
         Node(package='nav2',
              executable='subscribe_initialpose',
              name='rtab_subscribe_initialpose'),
-        Node(package='teleop_twist_keyboard',
-             executable='teleop_twist_keyboard'),
-        Node(package='ESP32_control',
-             executable='ros2_mqtt'),
+
         Node(
             package='rviz2',
             executable='rviz2',

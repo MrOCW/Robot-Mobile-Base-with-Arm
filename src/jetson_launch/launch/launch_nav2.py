@@ -46,11 +46,18 @@ def generate_launch_description():
         node_executable='joint_state_publisher'
     )
 
+    serial_node = Node(
+        package='ESP32_control',
+        node_executable='ros2_serial',
+        name='serial',
+        output='screen')
+
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
             default_value='false',
             description='Use simulation (Gazebo) clock if true'),
+        serial_node,
         robot_state_publisher_node,
         joint_state_publisher_node,
         rs_launch,
@@ -59,5 +66,6 @@ def generate_launch_description():
             node_name='base_link_to_camera_link',
             arguments=['0.1083660968', '0.0475', '0.0501', '0', '0', '0', 'base_link', 'camera_link']),
         lidar_launch,
-        rtab_launch
+        rtab_launch,
+        
     ])

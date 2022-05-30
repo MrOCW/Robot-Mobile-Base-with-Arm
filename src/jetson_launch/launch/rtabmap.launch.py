@@ -168,7 +168,11 @@ def launch_setup(context, *args, **kwargs):
                 "subscribe_rgbd": LaunchConfiguration('subscribe_rgbd'),
                 "guess_frame_id": LaunchConfiguration('odom_guess_frame_id'),
                 "guess_min_translation": LaunchConfiguration('odom_guess_min_translation'),
-                "guess_min_rotation": LaunchConfiguration('odom_guess_min_rotation')}],
+                "guess_min_rotation": LaunchConfiguration('odom_guess_min_rotation'),
+                "Odom/Strategy": "1",
+                "Odom/ResetCountdown": "1",
+                "Reg/Force3DoF":"True",
+                }],
             remappings=[
                 ("rgb/image", LaunchConfiguration('rgb_topic_relay')),
                 ("depth/image", LaunchConfiguration('depth_topic_relay')),
@@ -279,7 +283,8 @@ def launch_setup(context, *args, **kwargs):
                 "landmark_linear_variance": LaunchConfiguration('tag_linear_variance'),
                 "landmark_angular_variance": LaunchConfiguration('tag_angular_variance'),
                 "Mem/IncrementalMemory": ConditionalText("true", "false", IfCondition(PythonExpression(["'", LaunchConfiguration('localization'), "' != 'true'"]))._predicate_func(context)).perform(context),
-                "Mem/InitWMWithAllNodes": ConditionalText("true", "false", IfCondition(PythonExpression(["'", LaunchConfiguration('localization'), "' == 'true'"]))._predicate_func(context)).perform(context)
+                "Mem/InitWMWithAllNodes": ConditionalText("true", "false", IfCondition(PythonExpression(["'", LaunchConfiguration('localization'), "' == 'true'"]))._predicate_func(context)).perform(context),
+                "Rtabmap/DetectionRate":"20"
             }],
             remappings=[
                 ("rgb/image", LaunchConfiguration('rgb_topic_relay')),
@@ -378,7 +383,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument('localization', default_value='true', description='Launch in localization mode.'),
         DeclareLaunchArgument('rtabmapviz',   default_value='false',  description='Launch RTAB-Map UI (optional).'),
-        DeclareLaunchArgument('rviz',         default_value='true', description='Launch RVIZ (optional).'),
+        DeclareLaunchArgument('rviz',         default_value='false', description='Launch RVIZ (optional).'),
 
         DeclareLaunchArgument('use_sim_time', default_value='false', description='Use simulation (Gazebo) clock if true'),
 
@@ -390,7 +395,7 @@ def generate_launch_description():
         DeclareLaunchArgument('frame_id',       default_value='base_link',          description='Fixed frame id of the robot (base frame), you may set "base_link" or "base_footprint" if they are published. For camera-only config, this could be "camera_link".'),
         DeclareLaunchArgument('odom_frame_id',  default_value='odom',                   description='If set, TF is used to get odometry instead of the topic.'),
         DeclareLaunchArgument('map_frame_id',   default_value='map',                description='Output map frame id (TF).'),
-        DeclareLaunchArgument('publish_tf_map', default_value='true',               description='Publish TF between map and odometry.'),
+        DeclareLaunchArgument('publish_tf_map', default_value='false',               description='Publish TF between map and odometry.'),
         DeclareLaunchArgument('namespace',      default_value='rtabmap',            description=''),
         DeclareLaunchArgument('database_path',  default_value='~/.ros/rtabmap.db',  description='Where is the map saved/loaded.'),
         DeclareLaunchArgument('queue_size',     default_value='2',                 description=''),

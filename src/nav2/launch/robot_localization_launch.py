@@ -13,6 +13,7 @@ def generate_launch_description():
     output='screen',
     parameters=[{
                 "use_mag": False,
+                "publish_tf":False,
             }],
     remappings=[('/imu/data_raw', '/camera/imu_ros'),]
   )
